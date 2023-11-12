@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import { Repeater, RichText, types } from "react-bricks/frontend";
 import {
   textGradientEditProps,
@@ -19,6 +19,7 @@ import {
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
 import { ButtonProps } from "../../shared/bricks/Button";
+import { BadgeProps } from "../../shared/bricks/Badge";
 
 export interface HeroUnitProps extends LayoutProps {
   size: "medium" | "large";
@@ -28,6 +29,7 @@ export interface HeroUnitProps extends LayoutProps {
     | [{ type: string; children: { text: string; highlight?: boolean }[] }]
     | string;
   text: string;
+  badge?: BadgeProps[];
   buttons: ButtonProps[];
 }
 
@@ -165,6 +167,7 @@ HeroUnit.schema = {
       {
         text: "high tech",
         badgeColor: highlightTextColors.SKY.value,
+        textAlign: "center",
       },
     ],
     buttons: [

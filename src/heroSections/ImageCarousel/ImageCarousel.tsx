@@ -14,7 +14,7 @@ import {
 } from "../../LayoutSideProps";
 import { photos } from "../../shared/defaultImages";
 
-interface ImageCarouselProps extends LayoutProps {
+export interface ImageCarouselProps extends LayoutProps {
   slidesToShow: string;
   slidesToScroll: string;
   adaptAspectRatio: boolean;

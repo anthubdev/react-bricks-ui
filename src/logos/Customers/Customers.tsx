@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 import {
   LayoutProps,

@@ -1,8 +1,8 @@
 import React from "react";
 import { types } from "react-bricks/frontend";
 import { Repeater } from "react-bricks/frontend";
-import Container, { Padding, Size } from "../../shared/components/Container";
-import Section, { Border } from "../../shared/components/Section";
+import Container, {  } from "../../shared/components/Container";
+import Section from "../../shared/components/Section";
 
 import blockNames from "../../blockNames";
 import {
@@ -15,11 +15,13 @@ import {
 import classNames from "classnames";
 import { icons } from "../../shared/defaultImages";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
+import { CardProps } from "./Card";
 
-interface CardsProps extends LayoutProps {
+export interface CardsProps extends LayoutProps {
   colNumber: string;
   withTitle?: boolean;
   bigCenteredTitle?: boolean;
+  cards: CardProps[],
 }
 
 const Cards: types.Brick<CardsProps> = ({
@@ -65,7 +67,7 @@ const Cards: types.Brick<CardsProps> = ({
 Cards.schema = {
   name: blockNames.Cards,
   label: "Cards",
-  category: "main content",
+  category: "Main Content",
   tags: ["cards", "thumbnails", "features"],
   previewImageUrl: `/bricks-preview-images/${blockNames.Cards}.png`,
   getDefaultProps: () => ({

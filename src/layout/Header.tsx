@@ -22,7 +22,7 @@ import useOnClickOutside from "./useClickOutside";
 import { ButtonProps } from "../shared/bricks/Button";
 import { MenuItems } from "./HeaderMenuItem";
 
-interface HeaderProps extends LayoutProps {
+export interface HeaderProps extends LayoutProps {
   menuItems: MenuItems[];
   logo: types.IImageSource;
   buttons: ButtonProps[];

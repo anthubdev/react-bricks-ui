@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import classNames from "classnames";
 import { highlightTextColors } from "../../colors";
 
@@ -7,6 +7,7 @@ import blockNames from "../../blockNames";
 import { badgeColorsEditProps } from "../../LayoutSideProps";
 
 export interface BadgeProps {
+  text: string;
   badgeColor: { color: string; className: string };
   textAlign: "left" | "center";
   className?: string;

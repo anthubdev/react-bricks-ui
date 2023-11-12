@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import classNames from "classnames";
 import { Text, Link, types, useAdminContext } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
@@ -8,8 +8,8 @@ import { buttonColorsEditProps } from "../../LayoutSideProps";
 export interface ButtonProps {
   type: "button" | "link";
   text: string;
-  href: string;
-  isTargetBlank: boolean;
+  href?: string;
+  isTargetBlank?: boolean;
   buttonType: "submit" | "button" | "reset";
   buttonColor: {
     color: string;
@@ -20,7 +20,7 @@ export interface ButtonProps {
   variant: "solid" | "outline" | "ghost";
   padding: "normal" | "small";
   className?: string;
-  simpleAnchorLink: boolean;
+  simpleAnchorLink?: boolean;
 }
 
 const Button: types.Brick<ButtonProps> = ({
@@ -34,15 +34,16 @@ const Button: types.Brick<ButtonProps> = ({
   className,
   simpleAnchorLink = false,
 }) => {
+  const { isAdmin, previewMode } = useAdminContext();
+
   const target = isTargetBlank
     ? { target: "_blank", rel: "noopener noreferrer" }
     : {};
-  const { isAdmin, previewMode } = useAdminContext();
 
   if (type === "link") {
     return (
       <Link
-        href={href}
+        href={href || ""}
         {...target}
         className={classNames(
           "inline-block whitespace-nowrap text-center rounded-full font-bold leading-none hover:shadow-lg transition-all ease-out duration-150 hover:-translate-y-0.5",

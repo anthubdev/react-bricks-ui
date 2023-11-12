@@ -13,10 +13,12 @@ import {
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
+import { FormBuilderProps } from "../FormBuilder/FormBuilder";
 
 export interface ContactsFormProps extends LayoutProps {
   phoneNumber: string;
   email: string;
+  form: FormBuilderProps[]
 }
 
 const ContactsForm: types.Brick<ContactsFormProps> = ({
@@ -109,7 +111,7 @@ ContactsForm.schema = {
   name: "ContactsForm",
   label: "Contacts with Form",
   category: "contact",
-  previewImageUrl: `/bricks-preview-images/BrickContactsForm.png`,
+  previewImageUrl: `/bricks-preview-images/ContactsForm.png`,
   getDefaultProps: () => ({
     ...sectionDefaults,
     address: "4556 Brendan Ferry\nLos Angeles, CA 90210",
@@ -209,6 +211,7 @@ ContactsForm.schema = {
             buttonColor: buttonColors.SKY.value,
             text: "Send",
             variant: "solid",
+            padding: "normal"
           },
         ],
       },

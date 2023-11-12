@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 
 import blockNames from "../../blockNames";
@@ -14,10 +14,12 @@ import {
 import { icons } from "../../shared/defaultImages";
 import classNames from "classnames";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
+import { LinkCardProps } from "./LinkCard";
 
-interface LinkCardsProps extends LayoutProps {
+export interface LinkCardsProps extends LayoutProps {
   withTitle?: boolean;
   bigCenteredTitle?: boolean;
+  cards: LinkCardProps[];
 }
 
 const LinkCards: types.Brick<LinkCardsProps> = ({
@@ -57,7 +59,7 @@ const LinkCards: types.Brick<LinkCardsProps> = ({
 LinkCards.schema = {
   name: blockNames.LinkCards,
   label: "Link cards",
-  category: "main content",
+  category: "Main Content",
   tags: ["cards", "links", "thumbnails", "features", "banners"],
   playgroundLinkLabel: "View source code on Github",
   playgroundLinkUrl:
@@ -74,6 +76,7 @@ LinkCards.schema = {
       {
         title: "Visual editing",
         text: "The best UX on the market.",
+        withLink: true,
         linkPath: "https://reactbricks.com/visual-editing-cms",
         withIcon: true,
         icon: icons.VISUAL_EDITING,
@@ -81,6 +84,7 @@ LinkCards.schema = {
       {
         title: "React components",
         text: "Add visual magic to your components.",
+        withLink: true,
         linkPath: "https://reactbricks.com/react-cms",
         withIcon: true,
         icon: icons.COMPONENTS,
@@ -88,12 +92,16 @@ LinkCards.schema = {
       {
         title: "Multilanguage",
         text: "Internationalization? Built in.",
+        withLink: false,
+        linkPath: "",
         withIcon: true,
         icon: icons.MULTILANGUAGE,
       },
       {
         title: "Scheduled publishing",
         text: "Publish at midnight? Roger.",
+        withLink: false,
+        linkPath: "",
         withIcon: true,
         icon: icons.SCHEDULED_PUBLISHING,
       },

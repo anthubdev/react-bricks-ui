@@ -1,15 +1,13 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import { Image, types, Text } from "react-bricks/frontend";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { FiTwitter, FiLinkedin, FiGithub } from "react-icons/fi";
 import { textColors } from "../../colors";
-import { LayoutProps } from "../../LayoutSideProps";
 import { avatars } from "../../shared/defaultImages";
 
 import blockNames from "../../blockNames";
 
-export interface TeamItemProps extends LayoutProps {
+export interface TeamItemProps {
   twitter?: string;
   github?: string;
   linkedin?: string;

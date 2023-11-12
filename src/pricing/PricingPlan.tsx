@@ -6,7 +6,7 @@ import blockNames from "../blockNames";
 import { pricingColors, PricingColorValue, textColors } from "../colors";
 import { pricingColorsEditProps } from "../LayoutSideProps";
 
-interface PricingPlanProps {
+export interface PricingPlanProps {
   pricingColor: PricingColorValue;
   withPopularTag: boolean;
   buttonLinkPath: string;

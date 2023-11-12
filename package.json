@@ -1,43 +1,57 @@
 {
   "name": "@antdev/react-bricks-ui",
-  "version": "1.0.1",
+  "version": "1.0.3-alpha.9",
   "description": "Open source bricks (content blocks)",
   "author": "AntDev",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gioxoay/react-bricks-ui.git"
+    "url": "git+https://github.com/gioxoay/react-bricks-ui.git"
   },
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/esm/index.js",
-  "types": "./lib/esm/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "src"
+    "dist",
+    "scripts"
   ],
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
-    "publish": "npm publish --access public"
+    "rollup": "rollup -c",
+    "postinstall": "node scripts/postinstall.js"
   },
   "peerDependencies": {
     "react": "^18",
     "react-dom": "^18"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "email-validator": "^2.0.4",
     "jsonp": "^0.2.1",
     "prismjs": "^1.29.0",
     "react-bricks": "^4.0.5",
+    "react-hook-form": "^7.48.2",
+    "react-icons": "^4.11.0",
+    "react-query": "^3.39.3",
     "react-slick": "^0.29.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
     "@types/jsonp": "^0.2.2",
     "@types/node": "^20",
     "@types/prismjs": "^1.26.2",
     "@types/react": "^18",
     "@types/react-dom": "^18.2.14",
     "@types/react-slick": "^0.23.11",
+    "rollup": "^4.3.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "^5"
   }
 }

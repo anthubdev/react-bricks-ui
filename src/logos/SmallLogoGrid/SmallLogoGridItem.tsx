@@ -1,12 +1,11 @@
-import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import { Image, Link, types } from "react-bricks/frontend";
 import { iconLogos } from "../../shared/defaultImages";
 import blockNames from "../../blockNames";
 
 export interface SmallLogoGridItemProps {
   link: string;
-  targetBlank: boolean;
+  targetBlank?: boolean;
 }
 
 const Content: React.FC = () => (

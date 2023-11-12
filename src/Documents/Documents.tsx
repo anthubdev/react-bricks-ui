@@ -1,11 +1,9 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
 import { Repeater, types } from "react-bricks/frontend";
-//import blockNames from '../blockNames'
 import Container from "../shared/components/Container";
 import Section from "../shared/components/Section";
 import {
-  backgroundSideGroup,
   containerSizeEditProps,
   LayoutProps,
   neutralBackgroundSideGroup,
@@ -13,8 +11,11 @@ import {
   sectionDefaults,
 } from "../LayoutSideProps";
 import blockNames from "../blockNames";
+import { DocumentProps } from "./Document";
 
-export interface DocumentsProps extends LayoutProps {}
+export interface DocumentsProps extends LayoutProps {
+  documents: DocumentProps[];
+}
 
 const Documents: types.Brick<DocumentsProps> = ({
   backgroundColor,

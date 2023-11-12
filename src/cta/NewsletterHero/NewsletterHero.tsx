@@ -1,5 +1,5 @@
+import React from "react";
 import classNames from "classnames";
-import * as React from "react";
 import {
   Link,
   RichText,
@@ -19,11 +19,11 @@ import { gradients, textColors } from "../../colors";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
 
-export interface CallToActionProps extends LayoutProps {
+export interface NewsletterHeroProps extends LayoutProps {
   textGradient: keyof typeof gradients;
 }
 
-const CallToAction: types.Brick<CallToActionProps> = ({
+const NewsletterHero: types.Brick<NewsletterHeroProps> = ({
   backgroundColor,
   borderTop,
   borderBottom,
@@ -166,7 +166,7 @@ const CallToAction: types.Brick<CallToActionProps> = ({
   );
 };
 
-CallToAction.schema = {
+NewsletterHero.schema = {
   name: blockNames.NewsletterHero,
   label: "Newsletter hero",
   playgroundLinkLabel: "View source code on Github",
@@ -235,4 +235,4 @@ CallToAction.schema = {
   ],
 };
 
-export default CallToAction;
+export default NewsletterHero;

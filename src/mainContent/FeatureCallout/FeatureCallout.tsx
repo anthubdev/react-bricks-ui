@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import classNames from "classnames";
 
 import { Text, RichText, Image, types } from "react-bricks/frontend";
@@ -83,7 +83,7 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
 FeatureCallout.schema = {
   name: blockNames.FeatureCallout,
   label: "Feature callout",
-  category: "main content",
+  category: "Main Content",
   tags: ["feature", "single feature", "highlight"],
   playgroundLinkLabel: "View source code on Github",
   playgroundLinkUrl:

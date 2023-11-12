@@ -22,8 +22,8 @@ interface SectionProps {
 
 const Section: React.FC<SectionProps> = ({
   backgroundColor = bgColors.WHITE.value,
-  backgroundImage = "",
-  backgroundImageDark = "",
+  backgroundImage,
+  backgroundImageDark,
   borderTop = "none",
   borderBottom = "none",
   className = "",
@@ -46,8 +46,10 @@ const Section: React.FC<SectionProps> = ({
 
   useEffect(() => {
     currentTheme === "light"
-      ? setBgStyle(`url(${backgroundImage})`)
-      : setBgStyle(`url(${backgroundImageDark})`);
+      ? setBgStyle(backgroundImage ? `url(${backgroundImage.src})` : "none")
+      : setBgStyle(
+          backgroundImageDark ? `url(${backgroundImageDark.src})` : "none"
+        );
   }, [currentTheme, backgroundImage, backgroundImageDark]);
 
   return (

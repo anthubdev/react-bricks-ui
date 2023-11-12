@@ -1,10 +1,11 @@
-import * as React from "react";
+import React from "react";
 import classNames from "classnames";
 import { types, Plain, Text } from "react-bricks/frontend";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import blockNames from "../../blockNames";
 import { useAdminContext } from "react-bricks/frontend";
 import { textColors } from "../../colors";
+
 export interface FormInputProps {
   register: UseFormRegister<any>;
   errors: FieldErrorsImpl<{

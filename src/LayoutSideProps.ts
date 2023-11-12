@@ -14,8 +14,8 @@ export interface LayoutProps {
   backgroundColor?: { color: string; className: string };
   backgroundImage?: types.IImageSource;
   backgroundImageDark?: types.IImageSource;
-  borderTop: Border;
-  borderBottom: Border;
+  borderTop?: Border;
+  borderBottom?: Border;
   width?: Size;
   paddingTop: Padding;
   paddingBottom: Padding;

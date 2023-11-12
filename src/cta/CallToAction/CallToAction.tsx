@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import { Repeater, Text, types } from "react-bricks/frontend";
 import {
   backgroundSideGroup,
@@ -8,11 +8,14 @@ import {
   sectionDefaults,
 } from "../../LayoutSideProps";
 import blockNames from "../../blockNames";
-import { bgColors, buttonColors, textColors } from "../../colors";
+import { buttonColors, textColors } from "../../colors";
 import Container from "../../shared/components/Container";
-import Section, { Border } from "../../shared/components/Section";
+import Section from "../../shared/components/Section";
+import { ButtonProps } from "../../shared/bricks/Button";
 
-export interface CallToActionProps extends LayoutProps {}
+export interface CallToActionProps extends LayoutProps {
+  buttons: ButtonProps[];
+}
 
 const CallToAction: types.Brick<CallToActionProps> = ({
   backgroundColor,
@@ -78,11 +81,14 @@ CallToAction.schema = {
     buttons: [
       {
         text: "Discover more",
-        type: "solid",
+        type: "button",
         buttonColor: buttonColors.SKY.value,
         href: "https://reactbricks.com",
         isTargetBlank: true,
         padding: "normal",
+        buttonType: "button",
+        variant: "solid",
+        simpleAnchorLink: false,
       },
     ],
   }),

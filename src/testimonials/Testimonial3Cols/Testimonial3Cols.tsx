@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 
 import {
@@ -11,12 +11,14 @@ import { avatars } from "../../shared/defaultImages";
 import blockNames from "../../blockNames";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
+import { Testimonial3ColsItemProps } from "./Testimonial3ColsItem";
 
 export interface TestimonialProps extends LayoutProps {
   authorName: string;
   authorJobTitle: string;
   avatarImage: types.IImageSource;
   logoImage: types.IImageSource;
+  testimonials: Testimonial3ColsItemProps[]
 }
 
 const Testimonial3Cols: types.Brick<TestimonialProps> = ({
@@ -45,8 +47,8 @@ const Testimonial3Cols: types.Brick<TestimonialProps> = ({
 
 Testimonial3Cols.schema = {
   name: blockNames.Testimonial3Cols,
-  label: "Testimonial 3 cols",
-  category: "testimonials",
+  label: "Testimonial 3 Cols",
+  category: "Testimonials",
   playgroundLinkLabel: "View source code on Github",
   playgroundLinkUrl:
     "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Testimonial/Testimonial.tsx",

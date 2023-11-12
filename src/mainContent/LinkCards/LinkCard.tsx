@@ -6,9 +6,9 @@ import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
 import { icons } from "../../shared/defaultImages";
 
-interface LinkCardProps {
+export interface LinkCardProps {
   withIcon: boolean;
-  withTitle: boolean;
+  withTitle?: boolean;
   withLink: boolean;
   linkPath: string;
 }
@@ -60,7 +60,7 @@ const LinkCard: types.Brick<LinkCardProps> = ({
 LinkCard.schema = {
   name: blockNames.LinkCard,
   label: "Card",
-  category: "main content",
+  category: "Main Content",
   hideFromAddMenu: true,
   getDefaultProps: () => ({
     withIcon: true,

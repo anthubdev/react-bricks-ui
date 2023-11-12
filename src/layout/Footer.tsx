@@ -12,7 +12,7 @@ import { logos } from "../shared/defaultImages";
 import Container from "../shared/components/Container";
 import Section from "../shared/components/Section";
 
-interface FooterProps extends LayoutProps {
+export interface FooterProps extends LayoutProps {
   siteUrl: string;
 }
 

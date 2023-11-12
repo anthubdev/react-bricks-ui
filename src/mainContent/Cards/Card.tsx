@@ -6,12 +6,12 @@ import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
 import { icons } from "../../shared/defaultImages";
 
-interface CardProps {
+export interface CardProps {
   withIcon: boolean;
   withTitle: boolean;
   withLink: boolean;
-  linkText: string;
-  linkPath: string;
+  linkText?: string;
+  linkPath?: string;
 }
 
 const Card: types.Brick<CardProps> = ({
@@ -22,7 +22,9 @@ const Card: types.Brick<CardProps> = ({
   linkPath,
 }) => {
   const linkTextPlain =
-    typeof linkText === "string" ? linkText : Plain.serialize(linkText);
+    typeof linkText === "string"
+      ? linkText
+      : Plain.serialize(linkText || ("" as any));
 
   return (
     <div
@@ -67,7 +69,7 @@ const Card: types.Brick<CardProps> = ({
         {withLink && (
           <div className="mt-2">
             <Link
-              href={linkPath}
+              href={linkPath || ""}
               className={classNames(
                 "cursor-pointer text-sky-500 hover:text-sky-600 hover:-translate-y-px transition-all ease-out duration-150",
                 linkTextPlain ? "flex items-center space-x-1" : ""
@@ -105,7 +107,7 @@ const Card: types.Brick<CardProps> = ({
 Card.schema = {
   name: blockNames.Card,
   label: "Card",
-  category: "main content",
+  category: "Main Content",
   hideFromAddMenu: true,
   getDefaultProps: () => ({
     withIcon: true,

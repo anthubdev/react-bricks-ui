@@ -6,14 +6,14 @@ import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
 import { avatars } from "../../shared/defaultImages";
 
-interface Props {
+export interface Team2ColsItemProps {
   name?: string;
   twitter?: string;
   linkedin?: string;
   github?: string;
 }
 
-const Team2ColsItem: types.Brick<Props> = ({
+const Team2ColsItem: types.Brick<Team2ColsItemProps> = ({
   name,
   twitter,
   linkedin,

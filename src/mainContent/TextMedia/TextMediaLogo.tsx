@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Image, types } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
 
@@ -20,13 +20,11 @@ const TextMediaLogo: types.Brick = () => {
 TextMediaLogo.schema = {
   name: blockNames.TextMediaLogo,
   label: "Logo",
-  category: "main content",
+  category: "Main Content",
   hideFromAddMenu: true,
   playgroundLinkLabel: "View source code on Github",
   playgroundLinkUrl:
     "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/TextImage/TextMediaLogo.tsx",
-
-  //getDefaultProps: () => ({}),
 };
 
 export default TextMediaLogo;

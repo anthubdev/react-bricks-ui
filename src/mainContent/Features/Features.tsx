@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 
 import classNames from "classnames";
@@ -11,12 +11,14 @@ import {
   neutralBackgroundSideGroup,
   paddingBordersSideGroup,
 } from "../../LayoutSideProps";
+import { FeatureItemProps } from "./FeatureItem";
 import { icons } from "../../shared/defaultImages";
 
 export type ColsNumber = "2" | "3" | "4";
 
-interface FeaturesProps extends LayoutProps {
+export interface FeaturesProps extends LayoutProps {
   colsNumber: ColsNumber;
+  features: FeatureItemProps[];
 }
 
 const Features: types.Brick<FeaturesProps> = ({
@@ -47,7 +49,7 @@ const Features: types.Brick<FeaturesProps> = ({
 Features.schema = {
   name: blockNames.Features,
   label: "Features",
-  category: "main content",
+  category: "Main Content",
   tags: ["features"],
   playgroundLinkLabel: "View source code on Github",
   playgroundLinkUrl:

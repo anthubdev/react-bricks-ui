@@ -1,17 +1,21 @@
-import * as React from "react";
+import React from "react";
 import { Image, types, Text, Link, Plain } from "react-bricks/frontend";
 import classNames from "classnames";
 import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
 import { ColsNumber } from "./Features";
 import { icons } from "../../shared/defaultImages";
+import { ImageProps } from "../../ImageProps";
 
 export interface FeatureItemProps {
-  colsNumber: ColsNumber;
-  withIcon: boolean;
-  withLink: boolean;
-  linkText: string;
-  linkPath: string;
+  title: string;
+  text?: string;
+  image?: ImageProps;
+  colsNumber?: ColsNumber;
+  withIcon?: boolean;
+  withLink?: boolean;
+  linkText?: string;
+  linkPath?: string;
 }
 
 const getColumnClass = (colsNumber: ColsNumber) => {
@@ -33,10 +37,12 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
   linkPath,
 }) => {
   const linkTextPlain =
-    typeof linkText === "string" ? linkText : Plain.serialize(linkText);
+    typeof linkText === "string"
+      ? linkText
+      : Plain.serialize(linkText || ("" as any));
 
   return (
-    <div className={classNames("text-base", getColumnClass(colsNumber))}>
+    <div className={classNames("text-base", getColumnClass(colsNumber || "2"))}>
       {withIcon && (
         <Image
           propName="image"
@@ -73,7 +79,7 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
         {withLink && (
           <div className="mt-2">
             <Link
-              href={linkPath}
+              href={linkPath || ""}
               className={classNames(
                 "cursor-pointer text-sky-500 hover:text-sky-600 hover:-translate-y-px transition-all ease-out duration-150",
                 linkTextPlain ? "flex items-center space-x-1" : ""
@@ -110,7 +116,7 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
 FeatureItem.schema = {
   name: blockNames.FeatureItem,
   label: "Feature",
-  category: "main content",
+  category: "Main Content",
   hideFromAddMenu: true,
   playgroundLinkLabel: "View source code on Github",
   playgroundLinkUrl:

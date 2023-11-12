@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { types, Plain } from "react-bricks/frontend";
 import { Text } from "react-bricks/frontend";
 import blockNames from "../blockNames";
-import { pricingColors, PricingColorValue } from "../colors";
+import { PricingColorValue } from "../colors";
 
 interface PlanFeatureProps {
   withTag?: boolean;

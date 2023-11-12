@@ -1,10 +1,10 @@
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 
 import classNames from "classnames";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import { bgColors, highlightTextColors } from "../../colors";
+import { highlightTextColors } from "../../colors";
 import blockNames from "../../blockNames";
 import {
   containerWidthSideGroup,
@@ -14,9 +14,13 @@ import {
   sectionDefaults,
 } from "../../LayoutSideProps";
 import { logos } from "../../shared/defaultImages";
+import { BadgeProps } from "../../shared/bricks/Badge";
+import { LogoGridItemProps } from "./LogoGridItem";
 
 export interface LogoGridProps extends LayoutProps {
   targetBlank: boolean;
+  badge: BadgeProps[];
+  logos: LogoGridItemProps[];
 }
 
 const LogoGrid: types.Brick<LogoGridProps> = ({
@@ -75,6 +79,7 @@ LogoGrid.schema = {
       {
         text: "Technologies",
         badgeColor: highlightTextColors.GRAY.value,
+        textAlign: "left",
       },
     ],
     logos: [

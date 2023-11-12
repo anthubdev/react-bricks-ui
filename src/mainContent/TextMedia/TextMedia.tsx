@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import { Image, Link, Repeater, RichText, types } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
 import {
@@ -216,7 +216,7 @@ const TextMedia: types.Brick<TextMediaProps> = ({
 TextMedia.schema = {
   name: blockNames.TextMedia,
   label: "Text Media",
-  category: "main content",
+  category: "Main Content",
   tags: ["text media", "text image", "text video", "text logos"],
   previewIcon: (
     <svg viewBox="0 0 10 10">

@@ -1,6 +1,6 @@
+import React from "react";
 import jsonp from "jsonp";
 import { validate } from "email-validator";
-import React from "react";
 import { types } from "react-bricks/frontend";
 import { RichText, Text } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
@@ -21,7 +21,7 @@ enum NewsletterProvider {
   ConvertKit = "CONVERTKIT",
 }
 
-export interface NewsletterProps extends LayoutProps {
+export interface NewsletterSubscribeProps extends LayoutProps {
   provider: NewsletterProvider;
   mailchimpUrl: string;
   buttonText: string;
@@ -33,10 +33,9 @@ interface IStatus {
   message: string;
 }
 
-const Newsletter: types.Brick<NewsletterProps> = ({
+const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
   backgroundColor,
   width = "small",
-  provider,
   mailchimpUrl,
   resultOkText = `Thanks,you're all signed up!`,
 }) => {
@@ -218,7 +217,7 @@ const Newsletter: types.Brick<NewsletterProps> = ({
   );
 };
 
-Newsletter.schema = {
+NewsletterSubscribe.schema = {
   name: blockNames.NewsletterSubscribe,
   label: "Newsletter subscribe",
   category: "call to action",
@@ -255,4 +254,4 @@ Newsletter.schema = {
   ],
 };
 
-export default Newsletter;
+export default NewsletterSubscribe;

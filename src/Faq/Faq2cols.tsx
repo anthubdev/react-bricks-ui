@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 import {
   containerWidthSideGroup,
@@ -10,8 +10,11 @@ import {
 import blockNames from "../blockNames";
 import Container from "../shared/components/Container";
 import Section from "../shared/components/Section";
+import { FaqQuestionProps } from "./FaqItem";
 
-export interface FaqProps extends LayoutProps {}
+export interface FaqProps extends LayoutProps {
+  faqs: FaqQuestionProps[];
+}
 
 const Faq2cols: types.Brick<FaqProps> = ({
   backgroundColor,
@@ -41,7 +44,7 @@ const Faq2cols: types.Brick<FaqProps> = ({
 
 Faq2cols.schema = {
   name: blockNames.Faqs2Cols,
-  label: "Faq 2 cols",
+  label: "Faq 2 Cols",
   category: "faq",
   tags: ["frequently asked questions", "faq", "2 cols faq"],
   playgroundLinkLabel: "View source code on Github",
@@ -54,11 +57,13 @@ Faq2cols.schema = {
     borderBottom: "none",
     faqs: [
       {
+        id: "",
         question: "Why you should change your CMS today?",
         answer:
           "Because you care about your content creators and you are looking for a top developer experience, with a future-proof solution.",
       },
       {
+        id: "",
         question: "Can I create an e-commerce with React Bricks?",
         answer:
           "Sure! E-commerce solutions usually have a poor content management system for the product details page: let's change this with juicy visual editing!",

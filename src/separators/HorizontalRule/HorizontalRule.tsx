@@ -1,7 +1,7 @@
 import React from "react";
 import { types } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
-import Container, { Padding, Size } from "../../shared/components/Container";
+import Container, {  } from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
 import {
   backgroundColorsEditProps,

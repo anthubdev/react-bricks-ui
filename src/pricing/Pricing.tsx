@@ -11,8 +11,11 @@ import {
   sectionDefaults,
 } from "../LayoutSideProps";
 import { pricingColors } from "../colors";
+import { PricingPlanProps } from "./PricingPlan";
 
-interface PricingProps extends LayoutProps {}
+export interface PricingProps extends LayoutProps {
+  plans: PricingPlanProps[]
+}
 
 const Pricing: types.Brick<PricingProps> = ({
   backgroundColor,

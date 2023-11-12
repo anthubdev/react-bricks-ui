@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 import {
   containerWidthSideGroup,
@@ -10,8 +10,11 @@ import {
 import blockNames from "../blockNames";
 import Container from "../shared/components/Container";
 import Section from "../shared/components/Section";
+import { FaqQuestionProps } from "./FaqItem";
 
-export interface FaqProps extends LayoutProps {}
+export interface FaqProps extends LayoutProps {
+  faqs: FaqQuestionProps[];
+}
 
 const Faq: types.Brick<FaqProps> = ({
   backgroundColor,
@@ -54,6 +57,7 @@ Faq.schema = {
     width: "small",
     faqs: [
       {
+        id: "",
         question: "Why you should change your CMS today?",
         answer:
           "Because you care about your content creators and you are looking for a top developer experience, with a future-proof solution.",

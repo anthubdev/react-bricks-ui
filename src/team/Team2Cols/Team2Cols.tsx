@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
 import { Repeater, types } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
 import {
@@ -12,10 +12,12 @@ import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
 import { avatars } from "../../shared/defaultImages";
+import { Team2ColsItemProps } from "./Team2ColsItem";
 
-interface Team2ColsProps extends LayoutProps {
+export interface Team2ColsProps extends LayoutProps {
   withTitle?: boolean;
   bigCenteredTitle?: boolean;
+  members: Team2ColsItemProps[]
 }
 
 const Team2Cols: types.Brick<Team2ColsProps> = ({

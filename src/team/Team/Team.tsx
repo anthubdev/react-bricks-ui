@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 
 import classNames from "classnames";
@@ -14,10 +14,12 @@ import {
 } from "../../LayoutSideProps";
 import { avatars } from "../../shared/defaultImages";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
+import { TeamItemProps } from "./TeamItem";
 
 export interface TeamProps extends LayoutProps {
   withTitle?: boolean;
   bigCenteredTitle?: boolean;
+  members: TeamItemProps[]
 }
 
 const Team: types.Brick<TeamProps> = ({

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 
 import classNames from "classnames";
@@ -14,9 +14,13 @@ import {
   sectionDefaults,
 } from "../../LayoutSideProps";
 import { iconLogos } from "../../shared/defaultImages";
+import { BadgeProps } from "../../shared/bricks/Badge";
+import { SmallLogoGridItemProps } from "./SmallLogoGridItem";
 
 export interface SmallLogoGridProps extends LayoutProps {
   targetBlank: boolean;
+  badge: BadgeProps[];
+  logos: SmallLogoGridItemProps[];
 }
 
 const SmallLogoGrid: types.Brick<SmallLogoGridProps> = ({
@@ -75,6 +79,7 @@ SmallLogoGrid.schema = {
     badge: [
       {
         text: "Technologies",
+        textAlign: "left",
         badgeColor: highlightTextColors.GRAY.value,
       },
     ],

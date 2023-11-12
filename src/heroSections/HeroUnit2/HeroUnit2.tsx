@@ -1,5 +1,5 @@
+import React from "react";
 import classNames from "classnames";
-import * as React from "react";
 import { Repeater, RichText, types } from "react-bricks/frontend";
 import {
   backgroundWithImageBgSideGroup,
@@ -20,6 +20,7 @@ import {
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
 import { ButtonProps } from "../../shared/bricks/Button";
+import { BadgeProps } from "../../shared/bricks/Badge";
 
 export interface HeroUnitProps extends LayoutProps {
   textGradient: keyof typeof gradients;
@@ -28,7 +29,8 @@ export interface HeroUnitProps extends LayoutProps {
     | [{ type: string; children: { text: string; highlight?: boolean }[] }]
     | string;
   text: string;
-  buttons: ButtonProps[];
+  badge?: BadgeProps[];
+  buttons?: ButtonProps[];
 }
 
 const HeroUnit2: types.Brick<HeroUnitProps> = ({

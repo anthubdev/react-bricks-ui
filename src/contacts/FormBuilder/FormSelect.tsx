@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { types, Plain, Text } from "react-bricks/frontend";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import classNames from "classnames";

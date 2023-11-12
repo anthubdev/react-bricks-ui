@@ -1,5 +1,5 @@
+import React from "react";
 import classNames from "classnames";
-import * as React from "react";
 import { Repeater, types } from "react-bricks/frontend";
 import { useForm } from "react-hook-form";
 import blockNames from "../../blockNames";
@@ -12,9 +12,12 @@ import {
 } from "../../LayoutSideProps";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
+import { ButtonProps } from "../../shared/bricks/Button";
 
 export interface FormBuilderProps extends LayoutProps {
   buttonPosition: string;
+  "form-elements": { type: string; props: {} }[];
+  "form-buttons": ButtonProps[];
 }
 
 const FormBuilder: types.Brick<FormBuilderProps> = ({
@@ -198,6 +201,7 @@ FormBuilder.schema = {
         buttonColor: buttonColors.SKY.value,
         text: "Send",
         variant: "solid",
+        padding: "normal",
       },
     ],
   }),

@@ -1,9 +1,8 @@
-import * as React from "react";
+import React from "react";
 import classNames from "classnames";
-import { types, Text, Plain } from "react-bricks/frontend";
+import { Text, Plain, types } from "react-bricks/frontend";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import blockNames from "../../blockNames";
-import { useAdminContext } from "react-bricks/frontend";
 import { textColors } from "../../colors";
 export interface FormSingleRadioProps {
   register: UseFormRegister<any>;
@@ -25,10 +24,9 @@ const FormSingleRadio: types.Brick<FormSingleRadioProps> = ({
 
   isRequired,
   errors,
-}) => {
+}: FormSingleRadioProps) => {
   const labelTextContent =
     typeof label === "string" ? label : Plain.serialize(label);
-  const { isAdmin } = useAdminContext();
   const registerAttributes = fieldName
     ? register(
         fieldName?.replace(/\s/g, "").toLowerCase(),
@@ -54,7 +52,7 @@ const FormSingleRadio: types.Brick<FormSingleRadioProps> = ({
         value={value}
       />
       <label
-        htmlFor={isAdmin ? "" : value}
+        htmlFor={false ? "" : value}
         className={classNames("ml-2 block w-full min-w-[70px]")}
       >
         <Text

@@ -1,17 +1,17 @@
-import * as React from "react";
+import React from "react";
 import { Image, Plain, Text, types } from "react-bricks/frontend";
 import { avatars } from "../../shared/defaultImages";
 import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
 
-export interface TestimonialProps {
+export interface Testimonial3ColsItemProps {
   authorName: string;
   authorJobTitle: string;
   avatarImage: types.IImageSource;
-  logoImage: types.IImageSource;
+  logoImage?: types.IImageSource;
 }
 
-const Testimonial3ColsItem: types.Brick<TestimonialProps> = ({
+const Testimonial3ColsItem: types.Brick<Testimonial3ColsItemProps> = ({
   authorName,
 }) => {
   return (

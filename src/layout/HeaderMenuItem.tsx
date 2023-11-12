@@ -1,6 +1,6 @@
-import blockNames from "../blockNames";
-import classNames from "classnames";
 import React, { useRef, useState } from "react";
+import classNames from "classnames";
+import blockNames from "../blockNames";
 import { Text, Repeater, types, Link, Plain } from "react-bricks/frontend";
 import useOnClickOutside from "./useClickOutside";
 
@@ -30,7 +30,9 @@ const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useOnClickOutside(ref, () => setOpen(false));
+
   useOnClickOutside(mobileRef, () => setMobileMenuOpen(false));
+
   if (!submenuItems || !submenuItems.length) {
     return (
       <div>
@@ -49,12 +51,11 @@ const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({
           href={linkPath}
           className="block lg:hidden text-sm mb-3 transition-colors ease-out text-gray-800 hover:text-sky-600"
         >
-          <div onClick={() => setMobileMenuOpen(false)}>
-            {" "}
+          <span onClick={() => setMobileMenuOpen(false)}>
             {typeof linkText === "string"
               ? linkText
               : Plain.serialize(linkText)}
-          </div>
+          </span>
         </Link>
       </div>
     );

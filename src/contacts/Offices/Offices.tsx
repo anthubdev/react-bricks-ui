@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-import { Repeater, types, Text } from "react-bricks/frontend";
+import { Repeater, types } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
 import {
   LayoutProps,
@@ -11,10 +11,12 @@ import {
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
+import { OfficeProps } from "./Office";
 
 export interface OfficesProps extends LayoutProps {
   withTitle: boolean;
   bigCenteredTitle?: boolean;
+  offices: OfficeProps[];
 }
 
 const Offices: types.Brick<OfficesProps> = ({

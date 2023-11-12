@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { types } from "react-bricks/frontend";
 import { useReactBricksContext } from "react-bricks/frontend";
