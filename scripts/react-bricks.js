@@ -46,6 +46,7 @@ function processFile(filePath) {
 }
 
 function processDirectory(directoryPath) {
+  console.log('Process Directory: ' + directoryPath);
   const files = fs.readdirSync(directoryPath);
 
   files.forEach((file) => {

@@ -1,4 +1,3 @@
-import { Menu } from "@headlessui/react";
 import blockNames from "../blockNames";
 import React from "react";
 import { Text, types, Link } from "react-bricks/frontend";

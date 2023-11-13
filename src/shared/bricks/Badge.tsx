@@ -7,7 +7,7 @@ import blockNames from "../../blockNames";
 import { badgeColorsEditProps } from "../../LayoutSideProps";
 
 export interface BadgeProps {
-  text: string;
+  text?: string | any[];
   badgeColor: { color: string; className: string };
   textAlign: "left" | "center";
   className?: string;

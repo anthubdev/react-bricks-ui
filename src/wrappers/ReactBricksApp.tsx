@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PageViewer, ReactBricks, types } from "react-bricks/frontend";
 import { QueryClient, QueryClientProvider } from "react-query";
-import allBricks from "..";
+import allBricks from "../bricks";
 
 var queryClient = new QueryClient();
 
