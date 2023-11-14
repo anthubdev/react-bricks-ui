@@ -33,6 +33,7 @@ export default [
       "dayjs",
       "email-validator",
       "jsonp",
+      "next-themes",
       "react-icons/ai",
       "react-icons/bs",
       "react-icons/fa",

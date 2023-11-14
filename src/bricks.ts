@@ -7,6 +7,7 @@ import HeaderMenuSubItem from "./layout/HeaderMenuSubItem";
 import Footer from "./layout/Footer";
 import FooterColumn from "./layout/FooterColumn";
 import FooterLink from "./layout/FooterLink";
+import LayoutChildren from "./layout/LayoutChildren";
 
 // SHARED
 import Badge from "./shared/bricks/Badge";
@@ -198,6 +199,7 @@ const bricks: types.Theme = {
         Footer,
         FooterColumn,
         FooterLink,
+        LayoutChildren
       ],
     },
     {

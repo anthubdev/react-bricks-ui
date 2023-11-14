@@ -58,6 +58,7 @@ enum blockNames {
   Header = "Header",
   HeaderMenuItem = "HeaderMenuItem",
   HeaderMenuSubItem = "HeaderMenuSubItem",
+  LayoutChildren = "LayoutChildren",
   Footer = "Footer",
   FooterColumn = "FooterColumn",
   FooterLink = "FooterLink",

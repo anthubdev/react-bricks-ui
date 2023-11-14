@@ -32,7 +32,7 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   const bgColor = backgroundColor.className;
   const { isAdmin } = useAdminContext();
-  const { isDarkColorMode, toggleColorMode } = useReactBricksContext();
+  const { isDarkColorMode } = useReactBricksContext();
 
   const currentTheme = isAdmin
     ? isDarkColorMode
