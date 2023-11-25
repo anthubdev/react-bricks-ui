@@ -18,6 +18,8 @@ import { LinkCardProps } from "./LinkCard";
 
 export interface LinkCardsProps extends LayoutProps {
   withTitle?: boolean;
+  title?: string;
+  subtitle?: string;
   bigCenteredTitle?: boolean;
   cards: LinkCardProps[];
 }

@@ -12,7 +12,6 @@ export interface FormSelectProps {
   label: string;
   options?: string;
   isRequired: boolean;
-
   errors: FieldErrorsImpl<{
     [x: string]: any;
   }>;

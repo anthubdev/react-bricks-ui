@@ -14,7 +14,9 @@ import { pricingColors } from "../colors";
 import { PricingPlanProps } from "./PricingPlan";
 
 export interface PricingProps extends LayoutProps {
-  plans: PricingPlanProps[]
+  plans:
+    | PricingPlanProps[]
+    | { id: string; type: string; props: PricingPlanProps }[];
 }
 
 const Pricing: types.Brick<PricingProps> = ({

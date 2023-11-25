@@ -9,7 +9,7 @@ const Testimonial3Cols = (props: TestimonialProps) => {
       {usePageViewer([
         {
           id: "",
-          type: blockNames.Footer,
+          type: blockNames.Testimonial3Cols,
           props: {
             ...props,
             testimonials: props.testimonials.map((x) => {

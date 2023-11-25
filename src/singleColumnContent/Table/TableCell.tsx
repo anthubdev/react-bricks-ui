@@ -7,9 +7,11 @@ import { textColors } from "../../colors";
 type TextAlign = "left" | "center" | "right";
 
 export interface TableCellProps {
-  isHeader: boolean;
-  textAlign: TextAlign;
-  borders: "none" | "horizontal" | "all";
+  isHeader?: boolean;
+  textAlign?: TextAlign;
+  borders?: "none" | "horizontal" | "all";
+  text?: string;
+  cellText?: string;
 }
 
 const getAlignClass = (textAlign: TextAlign) => {

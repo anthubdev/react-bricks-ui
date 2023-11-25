@@ -7,6 +7,7 @@ import {
   RichText,
   Link,
 } from "react-bricks/frontend";
+import { Node } from "slate";
 import { FaTwitter } from "react-icons/fa";
 import Section from "../../shared/components/Section";
 import blockNames from "../../blockNames";
@@ -22,6 +23,11 @@ import {
 export interface TweetLightProps extends LayoutProps {
   tweetLink: string;
   authorLink: string;
+  author?: types.IImageSource;
+  authorName?: string;
+  authorTwitterHandle?: string;
+  tweetContent?: string | Node[];
+  date?: string;
 }
 
 const TweetLight: types.Brick<TweetLightProps> = ({

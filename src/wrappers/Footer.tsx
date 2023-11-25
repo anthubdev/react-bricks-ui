@@ -10,7 +10,12 @@ const Footer = (props: FooterProps) => {
         {
           id: "",
           type: blockNames.Footer,
-          props: props,
+          props: {
+            ...props,
+            columns: props.columns?.map((x) => {
+              return { type: blockNames.FooterColumn, props: x };
+            }),
+          },
         },
       ])}
     </ReactBricksApp>

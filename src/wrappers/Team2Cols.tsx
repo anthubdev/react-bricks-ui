@@ -9,7 +9,7 @@ const Team2Cols = (props: Team2ColsProps) => {
       {usePageViewer([
         {
           id: "",
-          type: blockNames.HeroUnit2,
+          type: blockNames.Team2Cols,
           props: {
             ...props,
             members: props.members.map((x) => {

@@ -9,6 +9,7 @@ export interface FormRadiobuttonsProps {
   register?: UseFormRegister<any>;
   fieldName: string;
   label: string;
+  radiobuttons: any;
   isRequired: boolean;
   requiredError?: string;
   columns: "1" | "2";

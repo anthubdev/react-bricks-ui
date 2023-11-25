@@ -18,8 +18,9 @@ import TitleSubtitle from "../../shared/components/TitleSubtitle";
 import { CardProps } from "./Card";
 
 export interface CardsProps extends LayoutProps {
-  colNumber: string;
   withTitle?: boolean;
+  title?: string;
+  subtitle?: string;
   bigCenteredTitle?: boolean;
   cards: CardProps[],
 }

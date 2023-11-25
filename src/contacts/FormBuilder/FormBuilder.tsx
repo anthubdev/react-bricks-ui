@@ -16,8 +16,22 @@ import { ButtonProps } from "../../shared/bricks/Button";
 
 export interface FormBuilderProps extends LayoutProps {
   buttonPosition: string;
-  "form-elements": { type: string; props: {} }[];
-  "form-buttons": ButtonProps[];
+  "form-elements":
+    | {
+        type?: any;
+        fieldName: string;
+        label: string;
+        isRequired: boolean;
+        inputType?: string;
+        columns: number | string;
+        requiredError?: string;
+        pattern?: string;
+        patternError?: string;
+      }[]
+    | { id?: string; type: string; props: {} }[];
+  "form-buttons":
+    | ButtonProps[]
+    | { id?: string; type: string; props: ButtonProps }[];
 }
 
 const FormBuilder: types.Brick<FormBuilderProps> = ({

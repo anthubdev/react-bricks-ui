@@ -7,6 +7,7 @@ import blockNames from "../../blockNames";
 export interface LogoGridItemProps {
   link: string;
   targetBlank?: boolean;
+  image?: types.IImageSource;
 }
 
 const Content: React.FC = () => (

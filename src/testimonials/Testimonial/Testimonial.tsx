@@ -18,6 +18,7 @@ export interface TestimonialProps extends LayoutProps {
   authorJobTitle: string;
   avatarImage: types.IImageSource;
   logoImage: types.IImageSource;
+  quote?: string;
 }
 
 const Testimonial: types.Brick<TestimonialProps> = ({

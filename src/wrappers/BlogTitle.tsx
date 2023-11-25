@@ -1,15 +1,15 @@
 import React from "react";
 import ReactBricksApp, { usePageViewer } from "./ReactBricksApp";
 import blockNames from "../blockNames";
-import { NewsletterHeroProps } from "../cta/NewsletterHero/NewsletterHero";
+import { BlogTitleProps } from "../singleColumnContent/BlogTitle/BlogTitle";
 
-const NewsletterHero = (props: NewsletterHeroProps) => {
+const BlogTitle = (props: BlogTitleProps) => {
   return (
     <ReactBricksApp>
       {usePageViewer([
         {
           id: "",
-          type: blockNames.NewsletterHero,
+          type: blockNames.BlogTitle,
           props: props,
         },
       ])}
@@ -17,4 +17,4 @@ const NewsletterHero = (props: NewsletterHeroProps) => {
   );
 };
 
-export default NewsletterHero;
+export default BlogTitle;

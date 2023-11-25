@@ -17,8 +17,8 @@ export interface LayoutProps {
   borderTop?: Border;
   borderBottom?: Border;
   width?: Size;
-  paddingTop: Padding;
-  paddingBottom: Padding;
+  paddingTop?: Padding;
+  paddingBottom?: Padding;
 }
 
 export const backgroundColorsEditProps: types.ISideEditProp = {

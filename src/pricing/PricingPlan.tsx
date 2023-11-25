@@ -1,15 +1,26 @@
-import classNames from "classnames";
 import React from "react";
-import { types } from "react-bricks/frontend";
-import { RichText, Text, Link, Repeater } from "react-bricks/frontend";
+import classNames from "classnames";
+import { RichText, Text, Link, Repeater, types } from "react-bricks/frontend";
+import { Node } from "slate";
 import blockNames from "../blockNames";
 import { pricingColors, PricingColorValue, textColors } from "../colors";
 import { pricingColorsEditProps } from "../LayoutSideProps";
+import { PlanFeatureProps } from "./PlanFeature";
 
 export interface PricingPlanProps {
   pricingColor: PricingColorValue;
   withPopularTag: boolean;
+  popularTagText?: string;
   buttonLinkPath: string;
+  planName?: string;
+  planDescription?: string | Node[];
+  planPrice?: string;
+  planConditions?: string;
+  buttonText?: string;
+  featuresTitle?: string;
+  features:
+    | PlanFeatureProps[]
+    | { id?: string; type: string; props: PlanFeatureProps }[];
 }
 
 const PricingPlan: types.Brick<PricingPlanProps> = ({

@@ -1,15 +1,15 @@
 import React from "react";
 import ReactBricksApp, { usePageViewer } from "./ReactBricksApp";
 import blockNames from "../blockNames";
-import { NewsletterHeroProps } from "../cta/NewsletterHero/NewsletterHero";
+import { CodeProps } from "../singleColumnContent/Code/Code";
 
-const NewsletterHero = (props: NewsletterHeroProps) => {
+const Code = (props: CodeProps) => {
   return (
     <ReactBricksApp>
       {usePageViewer([
         {
           id: "",
-          type: blockNames.NewsletterHero,
+          type: blockNames.Code,
           props: props,
         },
       ])}
@@ -17,4 +17,4 @@ const NewsletterHero = (props: NewsletterHeroProps) => {
   );
 };
 
-export default NewsletterHero;
+export default Code;

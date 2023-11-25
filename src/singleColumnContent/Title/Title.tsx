@@ -12,7 +12,7 @@ import Container, { Padding, Size } from "../../shared/components/Container";
 import Section, { Border } from "../../shared/components/Section";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
 
-interface TitleProps extends LayoutProps {
+export interface TitleProps extends LayoutProps {
   backgroundColor: { color: string; className: string };
   backgroundImage?: types.IImageSource;
   backgroundImageDark?: types.IImageSource;
@@ -23,6 +23,8 @@ interface TitleProps extends LayoutProps {
   width: Size;
   bigCentered: boolean;
   extraboldTitle: boolean;
+  title?: string;
+  subtitle?: string;
 }
 
 const Title: types.Brick<TitleProps> = ({

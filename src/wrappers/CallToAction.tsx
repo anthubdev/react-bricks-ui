@@ -9,7 +9,7 @@ const CallToAction = (props: CallToActionProps) => {
       {usePageViewer([
         {
           id: "",
-          type: blockNames.HeroUnit2,
+          type: blockNames.CallToAction,
           props: {
             ...props,
             buttons: props.buttons.map((x) => {

@@ -7,6 +7,8 @@ interface TitleSubtitleProps {
   bigCentered?: boolean;
   extraboldTitle?: boolean;
   className?: string;
+  title?: string;
+  subtitle?: string;
 }
 
 const TitleSubtitle: React.FC<TitleSubtitleProps> = ({

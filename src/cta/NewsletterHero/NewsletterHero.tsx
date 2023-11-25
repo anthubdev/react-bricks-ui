@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { Node } from "slate";
 import {
   Link,
   RichText,
@@ -21,6 +22,11 @@ import Section from "../../shared/components/Section";
 
 export interface NewsletterHeroProps extends LayoutProps {
   textGradient: keyof typeof gradients;
+  title?: string;
+  description?: string | Node[];
+  text?: string;
+  buttonText?: string;
+  privacy?: string | Node[];
 }
 
 const NewsletterHero: types.Brick<NewsletterHeroProps> = ({

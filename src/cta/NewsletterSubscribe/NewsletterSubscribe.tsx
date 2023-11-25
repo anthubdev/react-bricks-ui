@@ -22,10 +22,13 @@ enum NewsletterProvider {
 }
 
 export interface NewsletterSubscribeProps extends LayoutProps {
-  provider: NewsletterProvider;
+  provider: NewsletterProvider | string;
   mailchimpUrl: string;
   buttonText: string;
   resultOkText: string;
+  title?: string;
+  text?: string;
+  text2?: string;
 }
 
 interface IStatus {

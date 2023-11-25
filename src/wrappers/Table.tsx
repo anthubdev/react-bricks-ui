@@ -1,19 +1,19 @@
 import React from "react";
 import ReactBricksApp, { usePageViewer } from "./ReactBricksApp";
 import blockNames from "../blockNames";
-import { TeamProps } from "../team/Team/Team";
+import { TableProps } from "../singleColumnContent/Table/Table";
 
-const Team = (props: TeamProps) => {
+const Table = (props: TableProps) => {
   return (
     <ReactBricksApp>
       {usePageViewer([
         {
           id: "",
-          type: blockNames.Team,
+          type: blockNames.Table,
           props: {
             ...props,
-            members: props.members.map((x) => {
-              return { type: blockNames.TeamItem, props: x };
+            rows: props.rows.map((x) => {
+              return { type: blockNames.TableRow, props: x };
             }),
           },
         },
@@ -22,4 +22,4 @@ const Team = (props: TeamProps) => {
   );
 };
 
-export default Team;
+export default Table;

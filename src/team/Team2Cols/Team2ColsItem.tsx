@@ -7,10 +7,13 @@ import { textColors } from "../../colors";
 import { avatars } from "../../shared/defaultImages";
 
 export interface Team2ColsItemProps {
+  title?: string;
   name?: string;
   twitter?: string;
   linkedin?: string;
   github?: string;
+  picture?: types.IImageSource;
+  jobTitle?: string;
 }
 
 const Team2ColsItem: types.Brick<Team2ColsItemProps> = ({

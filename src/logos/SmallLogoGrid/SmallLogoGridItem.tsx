@@ -6,6 +6,7 @@ import blockNames from "../../blockNames";
 export interface SmallLogoGridItemProps {
   link: string;
   targetBlank?: boolean;
+  image: types.IImageSource;
 }
 
 const Content: React.FC = () => (

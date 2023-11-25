@@ -10,11 +10,13 @@ import {
 } from "../../LayoutSideProps";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
+import { TableRowProps } from "./TableRow";
 
 export interface TableProps extends LayoutProps {
   striped: boolean;
   withHeader: boolean;
   borders: "none" | "horizontal" | "all";
+  rows: TableRowProps[];
 }
 
 const Table: types.Brick<TableProps> = ({

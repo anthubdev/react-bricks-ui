@@ -2,7 +2,11 @@ import React from "react";
 import { Image, types } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
 
-const TextMediaLogo: types.Brick = () => {
+export interface TextMediaLogoProps {
+  image: types.IImageSource;
+}
+
+const TextMediaLogo: types.Brick<TextMediaLogoProps> = () => {
   return (
     <div>
       <Image

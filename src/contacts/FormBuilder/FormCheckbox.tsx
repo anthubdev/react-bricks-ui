@@ -10,7 +10,6 @@ export interface FormCheckboxProps {
   fieldName: string;
   label: string;
   isRequired: boolean;
-
   errors: FieldErrorsImpl<{
     [x: string]: any;
   }>;

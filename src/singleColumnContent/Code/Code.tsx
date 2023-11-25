@@ -27,6 +27,7 @@ export interface CodeProps extends LayoutProps {
   language: string;
   dataline?: string;
   showLineNumbers: boolean;
+  code?: string;
 }
 
 const Code: types.Brick<CodeProps> = ({

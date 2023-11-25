@@ -15,6 +15,8 @@ import { OfficeProps } from "./Office";
 
 export interface OfficesProps extends LayoutProps {
   withTitle: boolean;
+  title?: string;
+  subtitle?: string;
   bigCenteredTitle?: boolean;
   offices: OfficeProps[];
 }

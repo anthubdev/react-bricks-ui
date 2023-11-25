@@ -16,6 +16,8 @@ import { Team2ColsItemProps } from "./Team2ColsItem";
 
 export interface Team2ColsProps extends LayoutProps {
   withTitle?: boolean;
+  title?: string;
+  subtitle?: string;
   bigCenteredTitle?: boolean;
   members: Team2ColsItemProps[]
 }

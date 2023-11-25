@@ -2,7 +2,10 @@ import React from "react";
 import { types, Text } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
 
-export interface OfficeProps {}
+export interface OfficeProps {
+  city?: any;
+  address?: any;
+}
 
 const Office: types.Brick<OfficeProps> = ({}) => {
   return (
@@ -44,8 +47,8 @@ Office.schema = {
   playgroundLinkLabel: "View source code on Github",
   playgroundLinkUrl: "",
   getDefaultProps: () => ({
-    contactTitle: "San Francisco",
-    contactAddress: "3319 Harrison Street\nSan Francisco, CA",
+    city: "San Francisco",
+    address: "3319 Harrison Street\nSan Francisco, CA",
   }),
   sideEditProps: [],
 };

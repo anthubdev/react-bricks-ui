@@ -5,12 +5,11 @@ import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
 import { ColsNumber } from "./Features";
 import { icons } from "../../shared/defaultImages";
-import { ImageProps } from "../../ImageProps";
 
 export interface FeatureItemProps {
   title: string;
   text?: string;
-  image?: ImageProps;
+  image?: types.IImageSource;
   colsNumber?: ColsNumber;
   withIcon?: boolean;
   withLink?: boolean;

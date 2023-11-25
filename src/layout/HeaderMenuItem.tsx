@@ -3,15 +3,14 @@ import classNames from "classnames";
 import blockNames from "../blockNames";
 import { Text, Repeater, types, Link, Plain } from "react-bricks/frontend";
 import useOnClickOutside from "./useClickOutside";
+import { HeaderMenuSubItemProps } from "./HeaderMenuSubItem";
 
 export interface MenuItems {
   linkPath: string;
   linkText: string;
-  submenuItems?: {
-    linkText: string;
-    linkDescription: string;
-    linkPath: string;
-  }[];
+  submenuItems?:
+    | HeaderMenuSubItemProps[]
+    | { id?: string; type: string; props: HeaderMenuSubItemProps }[];
 }
 
 interface HeaderMenuItemProps extends MenuItems {

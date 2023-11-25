@@ -13,7 +13,7 @@ const FormBuilder = (props: FormBuilderProps) => {
           props: {
             ...props,
             "form-elements": props["form-elements"].map((x) => {
-              return { type: x.type, props: x };
+              return { type: x.type || blockNames.FormInput, props: x };
             }),
             "form-buttons": props["form-buttons"].map((x) => {
               return { type: blockNames.Button, props: x };

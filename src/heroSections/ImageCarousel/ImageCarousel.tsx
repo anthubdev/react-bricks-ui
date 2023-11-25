@@ -20,7 +20,7 @@ export interface ImageCarouselProps extends LayoutProps {
   adaptAspectRatio: boolean;
   autoplay: boolean;
   speed: string;
-  className: string;
+  className?: string;
   gap: string;
   images: {
     image: types.IImageSource;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, RichText, types } from "react-bricks/frontend";
+import { Node } from "slate";
 import blockNames from "../../blockNames";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
@@ -11,7 +12,9 @@ import {
   sectionDefaults,
 } from "../../LayoutSideProps";
 
-interface ParagraphProps extends LayoutProps {}
+export interface ParagraphProps extends LayoutProps {
+  text?: string | Node[];
+}
 
 const Paragraph: types.Brick<ParagraphProps> = ({
   backgroundColor,

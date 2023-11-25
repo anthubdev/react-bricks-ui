@@ -9,7 +9,6 @@ export interface FormSingleRadioProps {
   fieldName: string;
   label: string;
   value: string;
-
   isRequired: boolean;
   errors: FieldErrorsImpl<{
     [x: string]: any;

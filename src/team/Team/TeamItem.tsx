@@ -11,6 +11,9 @@ export interface TeamItemProps {
   twitter?: string;
   github?: string;
   linkedin?: string;
+  picture?: types.IImageSource;
+  memberName?: string;
+  jobTitle?: string;
 }
 
 const TeamItem: types.Brick<TeamItemProps> = ({

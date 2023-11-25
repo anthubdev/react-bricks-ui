@@ -1,4 +1,5 @@
 import React from "react";
+import { Node } from "slate";
 import { RichText, Image, Repeater, types, Link } from "react-bricks/frontend";
 import blockNames from "../blockNames";
 import { bgColors, textColors } from "../colors";
@@ -8,12 +9,16 @@ import {
   paddingBordersSideGroup,
   sectionDefaults,
 } from "../LayoutSideProps";
+import { FooterColumnProps } from "./FooterColumn";
 import { logos } from "../shared/defaultImages";
 import Container from "../shared/components/Container";
 import Section from "../shared/components/Section";
 
 export interface FooterProps extends LayoutProps {
   siteUrl: string;
+  logo: types.IImageSource;
+  copyright: string | Node[];
+  columns?: FooterColumnProps[];
 }
 
 const Footer: types.Brick<FooterProps> = ({

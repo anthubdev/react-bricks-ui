@@ -1,18 +1,11 @@
 import blockNames from "../blockNames";
 import React from "react";
-import {
-  Text,
-  RichText,
-  Image,
-  File,
-  Repeater,
-  types,
-  Link,
-} from "react-bricks/frontend";
+import { Text, types, Link } from "react-bricks/frontend";
 import { textColors } from "../colors";
 
-interface FooterLinkProps {
+export interface FooterLinkProps {
   linkPath: string;
+  linkText: string;
 }
 
 const FooterLink: types.Brick<FooterLinkProps> = ({ linkPath }) => {

@@ -12,7 +12,9 @@ import {
   sectionDefaults,
 } from "../../LayoutSideProps";
 
-export interface BigImageProps extends LayoutProps {}
+export interface BigImageProps extends LayoutProps {
+  image: types.IImageSource;
+}
 
 const BigImage: types.Brick<BigImageProps> = ({
   backgroundColor,

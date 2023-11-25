@@ -1,16 +1,15 @@
 import React from "react";
-import {
-  Text,
-  RichText,
-  Image,
-  File,
-  Repeater,
-  types,
-} from "react-bricks/frontend";
+import { Text, Repeater, types } from "react-bricks/frontend";
 import blockNames from "../blockNames";
 import { textColors } from "../colors";
+import { FooterLinkProps } from "./FooterLink";
 
-interface FooterColumnProps {}
+export interface FooterColumnProps {
+  title?: string;
+  links?:
+    | FooterLinkProps[]
+    | { id?: string; type: string; props: FooterLinkProps }[];
+}
 
 const FooterColumn: types.Brick<FooterColumnProps> = (props) => {
   return (

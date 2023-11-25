@@ -6,11 +6,12 @@ import { buttonColors } from "../../colors";
 import { buttonColorsEditProps } from "../../LayoutSideProps";
 
 export interface ButtonProps {
-  type: "button" | "link";
+  id?: string;
+  type?: "button" | "link";
   text: string;
   href?: string;
   isTargetBlank?: boolean;
-  buttonType: "submit" | "button" | "reset";
+  buttonType?: "submit" | "button" | "reset";
   buttonColor: {
     color: string;
     classNameSolid: string;
@@ -18,7 +19,7 @@ export interface ButtonProps {
     classNameGhost: string;
   };
   variant: "solid" | "outline" | "ghost";
-  padding: "normal" | "small";
+  padding?: "normal" | "small";
   className?: string;
   simpleAnchorLink?: boolean;
 }

@@ -18,6 +18,10 @@ import {
 } from "../../LayoutSideProps";
 import { photos } from "../../shared/defaultImages";
 import Video from "../../shared/components/Video";
+import { BadgeProps } from "../../shared/bricks/Badge";
+import { TextMediaLogoProps } from "./TextMediaLogo";
+import { ButtonProps } from "../../shared/bricks/Button";
+import { BulletListItemProps } from "../../shared/bricks/BulletListItem";
 
 export interface TextMediaProps extends LayoutProps {
   mediaType: "image" | "multiple-images" | "video-file" | "video-streaming";
@@ -35,10 +39,10 @@ export interface TextMediaProps extends LayoutProps {
   title: string;
   text: string;
   imageSource?: types.IImageSource;
-  buttons?: any[];
-  bulletListItems: any[];
-  badge: any[];
-  logos: any[];
+  buttons?: ButtonProps[] | { id: string; type: string; props: ButtonProps }[];
+  bulletListItems?: BulletListItemProps[];
+  badge?: BadgeProps[] | { id: string; type: string; props: BadgeProps }[];
+  logos?: TextMediaLogoProps[];
 }
 
 const TextMedia: types.Brick<TextMediaProps> = ({
@@ -442,8 +446,7 @@ TextMedia.schema = {
               href: "",
               isTargetBlank: false,
               buttonColor: buttonColors.PINK.value,
-              type: "solid",
-              isBigButton: false,
+              variant: "solid",
             },
           },
           {
@@ -454,8 +457,7 @@ TextMedia.schema = {
               href: "",
               isTargetBlank: false,
               buttonColor: buttonColors.PINK.value,
-              type: "outline",
-              isBigButton: false,
+              variant: "outline",
             },
           },
         ],

@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
 import { types } from "react-bricks/frontend";
 import { Text, Image, Link } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
@@ -11,6 +11,9 @@ export interface LinkCardProps {
   withTitle?: boolean;
   withLink: boolean;
   linkPath: string;
+  icon?: types.IImageSource;
+  title?: string;
+  text?: string;
 }
 
 const LinkCard: types.Brick<LinkCardProps> = ({

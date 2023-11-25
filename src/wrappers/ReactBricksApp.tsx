@@ -57,6 +57,7 @@ const ReactBricksApp = (props: { children: React.ReactNode }) => {
     contentClassName: `antialiased font-content ${colorMode} ${
       colorMode === "dark" ? "dark bg-gray-900" : "light bg-white"
     }`,
+    clickToEditSide: types.ClickToEditSide.None,
   };
 
   return (

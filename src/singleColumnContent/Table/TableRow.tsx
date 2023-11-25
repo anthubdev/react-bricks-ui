@@ -1,14 +1,17 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
 import { Repeater, types } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
+import { TableCellProps } from "./TableCell";
 
 export interface TableRowProps {
-  index: number;
+  index?: number;
   striped?: boolean;
   withHeader?: boolean;
   borders?: "none" | "horizontal" | "all";
-  cells: any[];
+  cells:
+    | TableCellProps[]
+    | { id?: string; type: string; props: TableCellProps }[];
 }
 
 const TableRow: types.Brick<TableRowProps> = ({
@@ -42,7 +45,7 @@ const TableRow: types.Brick<TableRowProps> = ({
             "border-b border-black/10 dark:border-white/20":
               borders === "horizontal",
           },
-          striped && index % 2 === 0
+          (striped && index) || 0 % 2 === 0
             ? "bg-gray-50 dark:bg-gray-800"
             : "bg-white dark:bg-gray-900"
         )}

@@ -9,10 +9,10 @@ const ContactsForm = (props: ContactsFormProps) => {
       {usePageViewer([
         {
           id: "",
-          type: blockNames.HeroUnit2,
+          type: blockNames.ContactsForm,
           props: {
             ...props,
-            form: props.form.map((x) => {
+            form: props.form?.map((x) => {
               return { type: blockNames.FormBuilder, props: x };
             }),
           },

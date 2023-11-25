@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 import { Repeater, types, Text, Link, Plain } from "react-bricks/frontend";
+import { Node } from "slate";
 import { FcDepartment, FcPhone, FcVoicePresentation } from "react-icons/fc";
 import blockNames from "../../blockNames";
 import { buttonColors, textColors } from "../../colors";
@@ -16,9 +17,12 @@ import TitleSubtitle from "../../shared/components/TitleSubtitle";
 import { FormBuilderProps } from "../FormBuilder/FormBuilder";
 
 export interface ContactsFormProps extends LayoutProps {
+  title?: string;
+  subtitle?: string;
   phoneNumber: string;
-  email: string;
-  form: FormBuilderProps[]
+  email?: string;
+  form?: FormBuilderProps[];
+  address?: string | Node[];
 }
 
 const ContactsForm: types.Brick<ContactsFormProps> = ({
@@ -85,7 +89,9 @@ const ContactsForm: types.Brick<ContactsFormProps> = ({
                 <Link
                   className="flex gap-x-4 text-sky-500 hover:text-sky-600 hover:-translate-y-px transition-all ease-out duration-150"
                   href={`mailto:${
-                    typeof email === "string" ? email : Plain.serialize(email)
+                    typeof email === "string"
+                      ? email
+                      : Plain.serialize(email || [])
                   }`}
                 >
                   <FcVoicePresentation size={"28px"} />
@@ -211,7 +217,7 @@ ContactsForm.schema = {
             buttonColor: buttonColors.SKY.value,
             text: "Send",
             variant: "solid",
-            padding: "normal"
+            padding: "normal",
           },
         ],
       },

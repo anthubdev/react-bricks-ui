@@ -11,6 +11,7 @@ import { LayoutProps, sectionDefaults } from "../../LayoutSideProps";
 
 export interface BlogTitleProps extends LayoutProps {
   title?: string;
+  subtitle?: string;
 }
 
 const BlogTitle: types.Brick<BlogTitleProps> = ({

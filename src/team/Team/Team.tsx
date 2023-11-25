@@ -18,6 +18,8 @@ import { TeamItemProps } from "./TeamItem";
 
 export interface TeamProps extends LayoutProps {
   withTitle?: boolean;
+  title?: string;
+  subtitle?: string;
   bigCenteredTitle?: boolean;
   members: TeamItemProps[]
 }

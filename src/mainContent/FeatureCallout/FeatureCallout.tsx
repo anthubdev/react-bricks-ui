@@ -1,8 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-
+import { Node } from "slate";
 import { Text, RichText, Image, types } from "react-bricks/frontend";
-
 import { textColors } from "../../colors";
 import Section from "../../shared/components/Section";
 import Container from "../../shared/components/Container";
@@ -15,7 +14,11 @@ import {
 } from "../../LayoutSideProps";
 import { icons } from "../../shared/defaultImages";
 
-export interface FeatureCalloutProps extends LayoutProps {}
+export interface FeatureCalloutProps extends LayoutProps {
+  image?: types.IImageSource;
+  title?: string;
+  text?: string | Node[];
+}
 
 const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
   backgroundColor,

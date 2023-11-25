@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { Node } from "slate";
 import { FiCheck } from "react-icons/fi";
 import { Text, types } from "react-bricks/frontend";
 import { highlightBgColors } from "../../colors";
@@ -8,8 +9,9 @@ import { bulletColorsEditProps } from "../../LayoutSideProps";
 
 export interface BulletListItemProps {
   bulletColor: { color: string; className: string };
-  className: string;
-  attributes: string;
+  className?: string;
+  attributes?: string;
+  text: string | Node[];
 }
 
 const BulletListItem: types.Brick<BulletListItemProps> = ({

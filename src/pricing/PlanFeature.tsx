@@ -1,14 +1,16 @@
 import React from "react";
+import { Node } from "slate";
 import classNames from "classnames";
 import { types, Plain } from "react-bricks/frontend";
 import { Text } from "react-bricks/frontend";
 import blockNames from "../blockNames";
 import { PricingColorValue } from "../colors";
 
-interface PlanFeatureProps {
+export interface PlanFeatureProps {
   withTag?: boolean;
-  featureText: string;
-  pricingColor: PricingColorValue;
+  featureText?: string | Node[];
+  tag?: string;
+  pricingColor?: PricingColorValue;
 }
 
 const PlanFeature: types.Brick<PlanFeatureProps> = ({
@@ -19,7 +21,7 @@ const PlanFeature: types.Brick<PlanFeatureProps> = ({
   const featureTextContent =
     typeof featureText === "string"
       ? featureText
-      : Plain.serialize(featureText);
+      : Plain.serialize(featureText || []);
 
   return (
     <div
@@ -53,7 +55,7 @@ const PlanFeature: types.Brick<PlanFeatureProps> = ({
             <div
               className={classNames(
                 "ml-1.5 min-w-[30px] px-1 py-1 leading-none rounded font-medium text-sm",
-                pricingColor.featureTagClassName
+                pricingColor?.featureTagClassName
               )}
             >
               {props.children}

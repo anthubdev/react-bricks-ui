@@ -1,6 +1,5 @@
 import React from "react";
 import { File, types, Text, RichText } from "react-bricks/frontend";
-//import blockNames from '../blockNames'
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { FcDocument } from "react-icons/fc";
 import blockNames from "../blockNames";
@@ -8,6 +7,14 @@ import blockNames from "../blockNames";
 export interface DocumentProps {
   color?: { color: string; className: string };
   withSize?: boolean;
+  fileName?: string;
+  fileDescription?: string;
+  linkText?: string;
+  file?: {
+    name?: string;
+    size?: number;
+    url?: string;
+  };
 }
 
 const formatFileSize = (kilobytes: number) => {

@@ -37,7 +37,7 @@ const PrismCode: React.FC<PrismCodeProps> = ({
         {...dataLineObj}
       >
         <code ref={codeRef} className={`language-${language}`}>
-          {code.trim()}
+          {code?.trim()}
         </code>
       </pre>
     </>

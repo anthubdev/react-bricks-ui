@@ -14,11 +14,7 @@ import Section from "../../shared/components/Section";
 import { Testimonial3ColsItemProps } from "./Testimonial3ColsItem";
 
 export interface TestimonialProps extends LayoutProps {
-  authorName: string;
-  authorJobTitle: string;
-  avatarImage: types.IImageSource;
-  logoImage: types.IImageSource;
-  testimonials: Testimonial3ColsItemProps[]
+  testimonials: Testimonial3ColsItemProps[];
 }
 
 const Testimonial3Cols: types.Brick<TestimonialProps> = ({

@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { Node } from "slate";
 import { highlightTextColors } from "../../colors";
 
 import { Text, types } from "react-bricks/frontend";
@@ -7,9 +8,9 @@ import blockNames from "../../blockNames";
 import { badgeColorsEditProps } from "../../LayoutSideProps";
 
 export interface BadgeProps {
-  text?: string | any[];
+  text?: string | Node[];
   badgeColor: { color: string; className: string };
-  textAlign: "left" | "center";
+  textAlign?: "left" | "center";
   className?: string;
 }
 

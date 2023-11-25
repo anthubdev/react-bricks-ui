@@ -9,6 +9,7 @@ export interface Testimonial3ColsItemProps {
   authorJobTitle: string;
   avatarImage: types.IImageSource;
   logoImage?: types.IImageSource;
+  quote?: string;
 }
 
 const Testimonial3ColsItem: types.Brick<Testimonial3ColsItemProps> = ({

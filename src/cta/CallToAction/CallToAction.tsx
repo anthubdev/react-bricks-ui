@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
 import { Repeater, Text, types } from "react-bricks/frontend";
 import {
   backgroundSideGroup,
@@ -14,6 +14,7 @@ import Section from "../../shared/components/Section";
 import { ButtonProps } from "../../shared/bricks/Button";
 
 export interface CallToActionProps extends LayoutProps {
+  text?: string;
   buttons: ButtonProps[];
 }
 

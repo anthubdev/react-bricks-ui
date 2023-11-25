@@ -22,6 +22,7 @@ export interface TweetProps extends LayoutProps {
   cards: string;
   conversation: string;
   theme: string;
+  position?: string;
 }
 
 const Tweet: types.Brick<TweetProps> = ({

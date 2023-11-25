@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React from "react";
+import { Node } from "slate";
 import { Plain, types } from "react-bricks/frontend";
 import { RichText, Text, Image, Link } from "react-bricks/frontend";
 import blockNames from "../../blockNames";
@@ -8,7 +9,10 @@ import { icons } from "../../shared/defaultImages";
 
 export interface CardProps {
   withIcon: boolean;
+  icon?: types.IImageSource;
   withTitle: boolean;
+  title?: string;
+  description?: string | Node[];
   withLink: boolean;
   linkText?: string;
   linkPath?: string;

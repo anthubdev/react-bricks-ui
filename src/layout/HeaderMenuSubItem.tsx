@@ -4,7 +4,9 @@ import { Text, types, Link } from "react-bricks/frontend";
 import classNames from "classnames";
 import { FiChevronRight } from "react-icons/fi";
 
-interface HeaderMenuSubItemProps {
+export interface HeaderMenuSubItemProps {
+  linkText: string;
+  linkDescription: string;
   linkPath: string;
 }
 
