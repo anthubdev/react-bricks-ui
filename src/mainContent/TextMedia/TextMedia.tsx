@@ -440,7 +440,7 @@ TextMedia.schema = {
         buttons: [
           {
             id: "6a41405a-4651-4899-b236-bc4f43cc1566",
-            type: "button",
+            type: "Button",
             props: {
               text: "Learn more",
               href: "",
@@ -451,7 +451,7 @@ TextMedia.schema = {
           },
           {
             id: "25623fa5-f03d-4798-afef-7febb8aac580",
-            type: "button",
+            type: "Button",
             props: {
               text: "Sign up",
               href: "",
@@ -465,7 +465,7 @@ TextMedia.schema = {
         badge: [
           {
             id: "3fc7d1eb-8d3d-49d8-94d3-47807c449a7a",
-            type: "badge",
+            type: "Badge",
             props: {
               text: "Design system",
               badgeColor: highlightTextColors.LIME.value,

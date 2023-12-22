@@ -68,28 +68,7 @@ const ReactBricksApp = (props: { children: React.ReactNode }) => {
 };
 
 export const usePageViewer = (content: types.IContentBlock[]) => {
-  const page: types.Page = {
-    id: "",
-    type: "",
-    name: "",
-    slug: "",
-    meta: {},
-    content: content,
-    author: {
-      id: "",
-      email: "",
-      firstName: "",
-      lastName: "",
-      avatarUrl: undefined,
-      company: undefined,
-    },
-    status: types.PageStatus.Published,
-    isLocked: false,
-    tags: [],
-    createdAt: "",
-    language: "",
-    translations: [],
-  };
+  const page: types.Page = usePageBuilder(content);
 
   return <PageViewer page={page}></PageViewer>;
 };
@@ -113,9 +92,20 @@ export const usePageBuilder = (content: types.IContentBlock[]) => {
     status: types.PageStatus.Published,
     isLocked: false,
     tags: [],
-    createdAt: "",
     language: "",
     translations: [],
+    createdAt: "",
+    lastEditedBy: {
+      date: "",
+      user: {
+        id: "",
+        firstName: "Ant",
+        lastName: "Dev",
+        email: "",
+        company: "AntDev",
+      },
+    },
+    editStatus: types.EditStatus.Working,
   };
 
   return page;
