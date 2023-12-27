@@ -44,7 +44,7 @@ const Faq: types.Brick<FaqProps> = ({
 
 Faq.schema = {
   name: blockNames.Faqs,
-  label: "Faq",
+  label: "FAQ",
   category: "faq",
   tags: ["frequently asked questions", "faq"],
   playgroundLinkLabel: "View source code on Github",
