@@ -1,6 +1,5 @@
 import React from "react";
-import { Image, types } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
+import { Image, types } from "../../shared";
 
 export interface TextMediaLogoProps {
   image: types.IImageSource;
@@ -19,16 +18,6 @@ const TextMediaLogo: types.Brick<TextMediaLogoProps> = () => {
       />
     </div>
   );
-};
-
-TextMediaLogo.schema = {
-  name: blockNames.TextMediaLogo,
-  label: "Logo",
-  category: "Main Content",
-  hideFromAddMenu: true,
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/TextImage/TextMediaLogo.tsx",
 };
 
 export default TextMediaLogo;

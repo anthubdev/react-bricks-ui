@@ -1,14 +1,6 @@
 import React from "react";
-import { Image, Plain, Text, types } from "react-bricks/frontend";
-
-import {
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
-import { avatars, iconLogos } from "../../shared/defaultImages";
-import blockNames from "../../blockNames";
+import { Image, Plain, Text, types } from "../../shared";
+import { LayoutProps } from "../../LayoutSideProps";
 import { textColors } from "../../colors";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
@@ -24,6 +16,9 @@ export interface TestimonialProps extends LayoutProps {
 const Testimonial: types.Brick<TestimonialProps> = ({
   authorName,
   authorJobTitle,
+  avatarImage,
+  logoImage,
+  quote,
   backgroundColor,
   borderTop,
   borderBottom,
@@ -55,6 +50,7 @@ const Testimonial: types.Brick<TestimonialProps> = ({
             return <span>{props.children}</span>;
           }}
           propName="quote"
+          value={quote}
         />
         <cite className="flex items-center justify-center not-italic">
           <Image
@@ -64,6 +60,7 @@ const Testimonial: types.Brick<TestimonialProps> = ({
                 : Plain.serialize(authorName)
             }
             propName="avatarImage"
+            source={avatarImage}
             aspectRatio={1}
             imageClassName="rounded-full w-10 h-10 object-contain"
           />
@@ -79,6 +76,7 @@ const Testimonial: types.Brick<TestimonialProps> = ({
               )}
               placeholder="Name..."
               propName="authorName"
+              value={authorName}
             />
             <Text
               renderBlock={(props) => (
@@ -88,6 +86,7 @@ const Testimonial: types.Brick<TestimonialProps> = ({
               )}
               placeholder="Job title..."
               propName="authorJobTitle"
+              value={authorJobTitle}
             />
           </div>
 
@@ -98,6 +97,7 @@ const Testimonial: types.Brick<TestimonialProps> = ({
                 : Plain.serialize(authorJobTitle)
             }
             propName="logoImage"
+            source={logoImage}
             imageClassName="w-20 h-10 object-contain object-left"
             renderWrapper={({ children }) => (
               <div className="ml-5 pl-5 border-l border-gray-300">
@@ -109,28 +109,6 @@ const Testimonial: types.Brick<TestimonialProps> = ({
       </Container>
     </Section>
   );
-};
-
-Testimonial.schema = {
-  name: blockNames.Testimonial,
-  label: "Testimonial",
-  category: "testimonials",
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Testimonial/Testimonial.tsx",
-  previewImageUrl: `/bricks-preview-images/${blockNames.Testimonial}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    borderTop: "boxed",
-    paddingBottom: "20",
-    quote:
-      "React Bricks allowed us to quickly create a beautiful website that drives business goals and is easy to maintain. No one from the marketing team would ever go back!",
-    authorName: "Matteo Frana",
-    authorJobTitle: "Founder @ React Bricks",
-    avatarImage: avatars.MATTEO_FRANA,
-    logoImage: iconLogos.REACT_BRICKS,
-  }),
-  sideEditProps: [neutralBackgroundSideGroup, paddingBordersSideGroup],
 };
 
 export default Testimonial;

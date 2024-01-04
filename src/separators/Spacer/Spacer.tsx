@@ -1,9 +1,7 @@
 import React from "react";
-import { types } from "react-bricks/frontend";
-import { bgColors } from "../../colors";
-import blockNames from "../../blockNames";
+import { types } from "../../shared";
 import Section from "../../shared/components/Section";
-import { backgroundColorsEditProps, LayoutProps } from "../../LayoutSideProps";
+import { LayoutProps } from "../../LayoutSideProps";
 
 export interface SpacerProps extends LayoutProps {
   height: string;
@@ -44,37 +42,6 @@ const Spacer: types.Brick<SpacerProps> = ({ height, backgroundColor }) => {
       <div className={getPadding(height + "")} />
     </Section>
   );
-};
-
-Spacer.schema = {
-  name: blockNames.Spacer,
-  label: "Spacer",
-  category: "separator",
-  previewImageUrl: `/bricks-preview-images/${blockNames.Spacer}.png`,
-  getDefaultProps: () => ({
-    backgroundColor: bgColors.WHITE.value,
-    height: "5",
-  }),
-  sideEditProps: [
-    {
-      groupName: "Layout",
-      defaultOpen: true,
-      props: [
-        {
-          name: "height",
-          label: "Height",
-          shouldRefreshText: true,
-          type: types.SideEditPropType.Range,
-          rangeOptions: {
-            min: 0,
-            max: 10,
-            step: 1,
-          },
-        },
-        backgroundColorsEditProps,
-      ],
-    },
-  ],
 };
 
 export default Spacer;

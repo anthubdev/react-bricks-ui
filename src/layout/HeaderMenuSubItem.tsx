@@ -1,26 +1,28 @@
-import blockNames from "../blockNames";
 import React from "react";
-import { Text, types, Link } from "react-bricks/frontend";
+import { Text, types, Link } from "../shared";
 import classNames from "classnames";
 import { FiChevronRight } from "react-icons/fi";
 
 export interface HeaderMenuSubItemProps {
-  linkText: string;
-  linkDescription: string;
-  linkPath: string;
+  linkText?: string;
+  linkDescription?: string;
+  linkPath?: string;
 }
 
 const HeaderMenuSubItem: types.Brick<HeaderMenuSubItemProps> = ({
+  linkText,
+  linkDescription,
   linkPath,
 }) => {
   return (
-    <Link href={linkPath} className="group p-0 mb-3 lg:p-3 flex items-start">
+    <Link href={linkPath!} className="group p-0 mb-3 lg:p-3 flex items-start">
       <div className="text-sky-500 lg:hidden mr-2">
         <FiChevronRight />
       </div>
       <div className="flex-1 overflow-hidden lg:overflow-auto">
         <Text
           propName="linkText"
+          value={linkText}
           placeholder="Type a text..."
           renderBlock={({ children }) => (
             <div
@@ -35,6 +37,7 @@ const HeaderMenuSubItem: types.Brick<HeaderMenuSubItemProps> = ({
         <div className="hidden lg:block">
           <Text
             propName="linkDescription"
+            value={linkDescription}
             placeholder="Type a text..."
             renderBlock={({ children }) => (
               <div
@@ -50,27 +53,6 @@ const HeaderMenuSubItem: types.Brick<HeaderMenuSubItemProps> = ({
       </div>
     </Link>
   );
-};
-
-HeaderMenuSubItem.schema = {
-  name: blockNames.HeaderMenuSubItem,
-  label: "Submenu Item",
-  category: "layout",
-  hideFromAddMenu: true,
-
-  getDefaultProps: () => ({
-    linkText: "Changelog",
-    linkDescription: "Release notes for all React Bricks versions",
-    linkPath: "/",
-  }),
-
-  sideEditProps: [
-    {
-      name: "linkPath",
-      label: "Link to...",
-      type: types.SideEditPropType.Text,
-    },
-  ],
 };
 
 export default HeaderMenuSubItem;

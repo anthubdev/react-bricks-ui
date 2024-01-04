@@ -1,32 +1,35 @@
 import React from "react";
 import classNames from "classnames";
-import { RichText, Text, Link, Repeater, types } from "react-bricks/frontend";
-import { Node } from "slate";
-import blockNames from "../blockNames";
+import { RichText, Text, Link, Repeater, types } from "../shared";
 import { pricingColors, PricingColorValue, textColors } from "../colors";
-import { pricingColorsEditProps } from "../LayoutSideProps";
-import { PlanFeatureProps } from "./PlanFeature";
+import PlanFeature, { PlanFeatureProps } from "./PlanFeature";
 
 export interface PricingPlanProps {
-  pricingColor: PricingColorValue;
-  withPopularTag: boolean;
+  pricingColor?: PricingColorValue;
+  withPopularTag?: boolean;
   popularTagText?: string;
-  buttonLinkPath: string;
+  buttonLinkPath?: string;
   planName?: string;
-  planDescription?: string | Node[];
+  planDescription?: string | types.TextElement[];
   planPrice?: string;
   planConditions?: string;
   buttonText?: string;
   featuresTitle?: string;
-  features:
-    | PlanFeatureProps[]
-    | { id?: string; type: string; props: PlanFeatureProps }[];
+  features?: PlanFeatureProps[];
 }
 
 const PricingPlan: types.Brick<PricingPlanProps> = ({
   pricingColor = pricingColors.CYAN.value,
   withPopularTag,
+  popularTagText,
   buttonLinkPath,
+  planName,
+  planDescription,
+  planPrice,
+  planConditions,
+  buttonText,
+  featuresTitle,
+  features,
 }) => {
   return (
     <div
@@ -50,6 +53,7 @@ const PricingPlan: types.Brick<PricingPlanProps> = ({
             )}
             placeholder="Tag"
             propName="popularTagText"
+            value={popularTagText}
           />
         ) : null}
       </div>
@@ -67,6 +71,7 @@ const PricingPlan: types.Brick<PricingPlanProps> = ({
           )}
           placeholder="Plan name..."
           propName="planName"
+          value={planName}
         />
 
         <RichText
@@ -77,6 +82,7 @@ const PricingPlan: types.Brick<PricingPlanProps> = ({
           )}
           placeholder="Description..."
           propName="planDescription"
+          value={planDescription}
         />
       </div>
       <div className="text-center mb-4">
@@ -93,6 +99,7 @@ const PricingPlan: types.Brick<PricingPlanProps> = ({
           )}
           placeholder="Price"
           propName="planPrice"
+          value={planPrice}
         />
 
         <Text
@@ -103,10 +110,11 @@ const PricingPlan: types.Brick<PricingPlanProps> = ({
           )}
           placeholder="per user / per month..."
           propName="planConditions"
+          value={planConditions}
         />
       </div>
       <Link
-        href={buttonLinkPath}
+        href={buttonLinkPath!}
         className={classNames(
           "cursor-pointer block mb-8",
           "text-center text-lg py-2 px-3 sm:px-5 rounded hover:text-white font-medium border-2 hover:shadow-lg transition duration-200",
@@ -118,6 +126,7 @@ const PricingPlan: types.Brick<PricingPlanProps> = ({
           renderBlock={(props) => <div>{props.children}</div>}
           placeholder="Action"
           propName="buttonText"
+          value={buttonText}
         />
       </Link>
       <div className="flex-1 flex flex-col ">
@@ -134,11 +143,14 @@ const PricingPlan: types.Brick<PricingPlanProps> = ({
           )}
           placeholder="type a text"
           propName="featuresTitle"
+          value={featuresTitle}
         />
 
         <ul className={classNames("text-lg text-left", textColors.GRAY_700)}>
           <Repeater
             propName="features"
+            items={features}
+            itemBuilder={(props) => <PlanFeature {...props} />}
             itemProps={{ pricingColor }}
             renderItemWrapper={(item) => (
               <li key={item.key} className="flex items-center space-x-2 mb-2">
@@ -150,60 +162,6 @@ const PricingPlan: types.Brick<PricingPlanProps> = ({
       </div>
     </div>
   );
-};
-
-PricingPlan.schema = {
-  name: blockNames.PricingPlan,
-  label: "Plan",
-  category: "pricing",
-  hideFromAddMenu: true,
-  getDefaultProps: () => ({
-    popularTagText: "Most popular",
-    withPopularTag: false,
-    pricingColor: pricingColors.CYAN.value,
-    planName: "Entry",
-    planDescription: "For startups and teams starting using React Bricks.",
-    planPrice: "$ 99",
-    planConditions: "per app / month",
-    buttonText: "Get started",
-    buttonLinkPath: "/",
-    featuresTitle: "Everything in Community, plus:",
-    features: [
-      {
-        featureText: "5 users included",
-      },
-      {
-        featureText: "Up to 100 pages",
-      },
-      {
-        featureText: "Media library",
-        withTag: true,
-        tag: "Soon",
-      },
-    ],
-  }),
-  repeaterItems: [
-    {
-      name: "features",
-      itemType: blockNames.PlanFeature,
-      itemLabel: "feature",
-      min: 0,
-      max: 15,
-    },
-  ],
-  sideEditProps: [
-    pricingColorsEditProps,
-    {
-      name: "withPopularTag",
-      label: "Popular tag",
-      type: types.SideEditPropType.Boolean,
-    },
-    {
-      name: "buttonLinkPath",
-      label: "Button link",
-      type: types.SideEditPropType.Text,
-    },
-  ],
 };
 
 export default PricingPlan;

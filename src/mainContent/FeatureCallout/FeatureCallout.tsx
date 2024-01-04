@@ -1,23 +1,15 @@
 import React from "react";
 import classNames from "classnames";
-import { Node } from "slate";
-import { Text, RichText, Image, types } from "react-bricks/frontend";
+import { Text, RichText, Image, types } from "../../shared";
 import { textColors } from "../../colors";
 import Section from "../../shared/components/Section";
 import Container from "../../shared/components/Container";
-import blockNames from "../../blockNames";
-import {
-  backgroundSideGroup,
-  LayoutProps,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
-import { icons } from "../../shared/defaultImages";
+import { LayoutProps } from "../../LayoutSideProps";
 
 export interface FeatureCalloutProps extends LayoutProps {
   image?: types.IImageSource;
   title?: string;
-  text?: string | Node[];
+  text?: string | types.TextElement[];
 }
 
 const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
@@ -26,6 +18,9 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
   borderBottom,
   paddingTop,
   paddingBottom,
+  image,
+  title,
+  text,
 }) => {
   return (
     <Section
@@ -44,6 +39,7 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
         <div className="sm:mr-10 mb-4 sm:mb-0">
           <Image
             propName="image"
+            source={image}
             alt="image"
             imageClassName="w-36 h-36 object-contain"
           />
@@ -51,6 +47,7 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
         <div className="flex-1">
           <Text
             propName="title"
+            value={title}
             renderBlock={(props) => (
               <div
                 className={classNames(
@@ -66,6 +63,7 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
           />
           <RichText
             propName="text"
+            value={text}
             renderBlock={(props) => (
               <span
                 className={classNames("leading-6", textColors.GRAY_700)}
@@ -81,27 +79,6 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
       </Container>
     </Section>
   );
-};
-
-FeatureCallout.schema = {
-  name: blockNames.FeatureCallout,
-  label: "Feature callout",
-  category: "Main Content",
-  tags: ["feature", "single feature", "highlight"],
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/FeatureCallout/FeatureCallout.tsx",
-  previewImageUrl: `/bricks-preview-images/${blockNames.FeatureCallout}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    borderTop: "boxed",
-    paddingTop: "12",
-    paddingBottom: "12",
-    title: "Easy like Wix, but your own.",
-    text: "A great user experience for Content creators, React components for Developers.",
-    image: icons.PHOTOS,
-  }),
-  sideEditProps: [backgroundSideGroup, paddingBordersSideGroup],
 };
 
 export default FeatureCallout;

@@ -1,22 +1,20 @@
 import React from "react";
 import classNames from "classnames";
-import { Node } from "slate";
 import { FiCheck } from "react-icons/fi";
-import { Text, types } from "react-bricks/frontend";
+import { Text, types } from "../../shared";
 import { highlightBgColors } from "../../colors";
-import blockNames from "../../blockNames";
-import { bulletColorsEditProps } from "../../LayoutSideProps";
 
 export interface BulletListItemProps {
-  bulletColor: { color: string; className: string };
+  bulletColor?: { color: string; className: string };
   className?: string;
   attributes?: string;
-  text: string | Node[];
+  text?: string | types.TextElement[];
 }
 
 const BulletListItem: types.Brick<BulletListItemProps> = ({
   bulletColor = highlightBgColors.SKY.value,
   className,
+  text
 }) => {
   return (
     <div
@@ -36,6 +34,7 @@ const BulletListItem: types.Brick<BulletListItemProps> = ({
       <div>
         <Text
           propName="text"
+          value={text}
           renderBlock={(props) => (
             <span
               className="text-gray-700 dark:text-gray-100 leading-tight inline-block min-w-[120px]"
@@ -49,22 +48,6 @@ const BulletListItem: types.Brick<BulletListItemProps> = ({
       </div>
     </div>
   );
-};
-
-BulletListItem.schema = {
-  name: blockNames.BulletListItem,
-  label: "List item",
-  category: "shared",
-  hideFromAddMenu: true,
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/shared/BulletListItem.tsx",
-
-  getDefaultProps: () => ({
-    bulletColor: highlightBgColors.SKY.value,
-    text: "New item",
-  }),
-  sideEditProps: [bulletColorsEditProps],
 };
 
 export default BulletListItem;

@@ -1,23 +1,15 @@
 import React from "react";
-import { Node } from "slate";
-import { RichText, Image, Repeater, types, Link } from "react-bricks/frontend";
-import blockNames from "../blockNames";
-import { bgColors, textColors } from "../colors";
-import {
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../LayoutSideProps";
-import { FooterColumnProps } from "./FooterColumn";
-import { logos } from "../shared/defaultImages";
+import { RichText, Image, Repeater, types, Link } from "../shared";
+import { textColors } from "../colors";
+import { LayoutProps } from "../LayoutSideProps";
+import FooterColumn, { FooterColumnProps } from "./FooterColumn";
 import Container from "../shared/components/Container";
 import Section from "../shared/components/Section";
 
 export interface FooterProps extends LayoutProps {
   siteUrl: string;
   logo: types.IImageSource;
-  copyright: string | Node[];
+  copyright: string | types.TextElement[];
   columns?: FooterColumnProps[];
 }
 
@@ -28,6 +20,9 @@ const Footer: types.Brick<FooterProps> = ({
   paddingTop,
   paddingBottom,
   siteUrl,
+  logo,
+  copyright,
+  columns,
 }) => {
   return (
     <footer>
@@ -45,6 +40,7 @@ const Footer: types.Brick<FooterProps> = ({
             <Link href={siteUrl} className="block mb-4">
               <Image
                 propName="logo"
+                source={logo}
                 alt="Logo"
                 maxWidth={300}
                 imageClassName="w-48 h-7 object-contain object-left"
@@ -52,6 +48,7 @@ const Footer: types.Brick<FooterProps> = ({
             </Link>
             <RichText
               propName="copyright"
+              value={copyright}
               placeholder="Copyright notice"
               renderBlock={({ children }) => (
                 <p className={`text-sm ${textColors.GRAY_500}`}>{children}</p>
@@ -67,138 +64,15 @@ const Footer: types.Brick<FooterProps> = ({
               )}
             />
           </div>
-          <Repeater propName="columns" />
+          <Repeater
+            propName="columns"
+            items={columns}
+            itemBuilder={(props) => <FooterColumn {...props} />}
+          />
         </Container>
       </Section>
     </footer>
   );
-};
-
-Footer.schema = {
-  name: blockNames.Footer,
-  label: "Footer",
-  category: "layout",
-  tags: ["footer"],
-  previewImageUrl: `/bricks-preview-images/${blockNames.Footer}.png`,
-  repeaterItems: [
-    {
-      name: "columns",
-      itemType: blockNames.FooterColumn,
-      max: 4,
-    },
-  ],
-
-  // Defaults when a new brick is added
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    backgroundColor: bgColors.LIGHT_GRAY.value,
-    borderTop: "full",
-    logo: logos.REACT_BRICKS,
-    siteUrl: "",
-    copyright: [
-      {
-        type: "paragraph",
-        children: [
-          {
-            text: "Visual editing CMS for React.",
-          },
-        ],
-      },
-      {
-        type: "paragraph",
-        children: [
-          {
-            text: "Proudly made in Italy",
-          },
-        ],
-      },
-    ],
-    columns: [
-      {
-        title: "Company",
-        links: [
-          {
-            linkText: "About us",
-            linkPath: "/",
-          },
-          {
-            linkText: "Why React Bricks?",
-            linkPath: "/",
-          },
-          {
-            linkText: "Terms of service",
-            linkPath: "/",
-          },
-          {
-            linkText: "Privacy",
-            linkPath: "/",
-          },
-        ],
-      },
-      {
-        title: "Features",
-        links: [
-          {
-            linkText: "Visual editing",
-            linkPath: "/",
-          },
-          {
-            linkText: "React components",
-            linkPath: "/",
-          },
-          {
-            linkText: "Enterprise-ready",
-            linkPath: "/",
-          },
-          {
-            linkText: "Roadmap",
-            linkPath: "/",
-          },
-        ],
-      },
-      {
-        title: "Use cases",
-        links: [
-          {
-            linkText: "Content editors",
-            linkPath: "/",
-          },
-          {
-            linkText: "Developers",
-            linkPath: "/",
-          },
-          {
-            linkText: "Enterprises",
-            linkPath: "/",
-          },
-        ],
-      },
-      {
-        title: "Learn",
-        links: [
-          {
-            linkText: "Tutorial",
-            linkPath: "/",
-          },
-          {
-            linkText: "Documentation",
-            linkPath: "/",
-          },
-          {
-            linkText: "Videos",
-            linkPath: "/",
-          },
-          {
-            linkText: "Blog",
-            linkPath: "/",
-          },
-        ],
-      },
-    ],
-  }),
-
-  // Sidebar Edit controls for props
-  sideEditProps: [neutralBackgroundSideGroup, paddingBordersSideGroup],
 };
 
 export default Footer;

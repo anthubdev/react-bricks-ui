@@ -1,21 +1,18 @@
 import React, { useRef, useState } from "react";
 import classNames from "classnames";
-import blockNames from "../blockNames";
-import { Text, Repeater, types, Link, Plain } from "react-bricks/frontend";
+import { Text, Repeater, types, Link, Plain } from "../shared";
 import useOnClickOutside from "./useClickOutside";
-import { HeaderMenuSubItemProps } from "./HeaderMenuSubItem";
+import HeaderMenuSubItem, { HeaderMenuSubItemProps } from "./HeaderMenuSubItem";
 
 export interface MenuItems {
-  linkPath: string;
-  linkText: string;
-  submenuItems?:
-    | HeaderMenuSubItemProps[]
-    | { id?: string; type: string; props: HeaderMenuSubItemProps }[];
+  linkPath?: string;
+  linkText?: string;
+  submenuItems?: HeaderMenuSubItemProps[];
 }
 
 interface HeaderMenuItemProps extends MenuItems {
-  mobileRef: React.MutableRefObject<HTMLDivElement>;
-  setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  mobileRef?: React.MutableRefObject<HTMLDivElement>;
+  setMobileMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({
@@ -30,27 +27,28 @@ const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({
 
   useOnClickOutside(ref, () => setOpen(false));
 
-  useOnClickOutside(mobileRef, () => setMobileMenuOpen(false));
+  useOnClickOutside(mobileRef!, () => setMobileMenuOpen!(false));
 
   if (!submenuItems || !submenuItems.length) {
     return (
       <div>
         <Link
-          href={linkPath}
+          href={linkPath!}
           className="hidden lg:inline-flex justify-center items-center text-sm font-bold py-1.5 px-2 rounded-[5px] transition-colors ease-out text-gray-600 dark:text-white hover:bg-sky-500/20 dark:hover:bg-sky-500/40 hover:text-sky-600"
           activeClassName="text-sky-600 bg-sky-500/10 dark:bg-sky-500/30"
         >
           <Text
             propName="linkText"
+            value={linkText}
             placeholder="Type a text..."
             renderBlock={({ children }) => <span>{children}</span>}
           />
         </Link>
         <Link
-          href={linkPath}
+          href={linkPath!}
           className="block lg:hidden text-sm mb-3 transition-colors ease-out text-gray-800 hover:text-sky-600"
         >
-          <span onClick={() => setMobileMenuOpen(false)}>
+          <span onClick={() => setMobileMenuOpen!(false)}>
             {typeof linkText === "string"
               ? linkText
               : Plain.serialize(linkText)}
@@ -72,6 +70,7 @@ const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({
         >
           <Text
             propName="linkText"
+            value={linkText}
             placeholder="Type a text..."
             renderBlock={({ children }) => <div>{children}</div>}
           />
@@ -105,6 +104,8 @@ const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({
           <div className="w-64 bg-white p-3 border rounded-md shadow-lg absolute top-9 z-[1000]">
             <Repeater
               propName="submenuItems"
+              items={submenuItems}
+              itemBuilder={(props) => <HeaderMenuSubItem {...props} />}
               renderItemWrapper={(item) => (
                 <div
                   key={item.key}
@@ -126,8 +127,10 @@ const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({
         </div>
         <Repeater
           propName="submenuItems"
+          items={submenuItems}
+          itemBuilder={(props) => <HeaderMenuSubItem {...props} />}
           renderItemWrapper={(item) => (
-            <div key={item.key} onClick={() => setMobileMenuOpen(false)}>
+            <div key={item.key} onClick={() => setMobileMenuOpen!(false)}>
               {item}
             </div>
           )}
@@ -135,33 +138,6 @@ const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({
       </div>
     </div>
   );
-};
-
-HeaderMenuItem.schema = {
-  name: blockNames.HeaderMenuItem,
-  label: "Menu Item",
-  category: "layout",
-  hideFromAddMenu: true,
-
-  repeaterItems: [
-    {
-      name: "submenuItems",
-      itemType: blockNames.HeaderMenuSubItem,
-    },
-  ],
-
-  getDefaultProps: () => ({
-    linkPath: "/about-us",
-    linkText: "About us",
-  }),
-
-  sideEditProps: [
-    {
-      name: "linkPath",
-      label: "Link to...",
-      type: types.SideEditPropType.Text,
-    },
-  ],
 };
 
 export default HeaderMenuItem;

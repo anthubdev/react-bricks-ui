@@ -1,31 +1,24 @@
 import React from "react";
-import { Repeater, types } from "react-bricks/frontend";
-
 import classNames from "classnames";
+import { Repeater, types } from "../../shared";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import blockNames from "../../blockNames";
-import {
-  containerWidthSideGroup,
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
-import { avatars } from "../../shared/defaultImages";
+import { LayoutProps } from "../../LayoutSideProps";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
-import { TeamItemProps } from "./TeamItem";
+import TeamItem, { TeamItemProps } from "./TeamItem";
 
 export interface TeamProps extends LayoutProps {
   withTitle?: boolean;
   title?: string;
   subtitle?: string;
   bigCenteredTitle?: boolean;
-  members: TeamItemProps[]
+  members: TeamItemProps[];
 }
 
 const Team: types.Brick<TeamProps> = ({
   withTitle = false,
+  title,
+  subtitle,
   bigCenteredTitle = false,
   backgroundColor,
   borderTop,
@@ -33,6 +26,7 @@ const Team: types.Brick<TeamProps> = ({
   paddingTop,
   paddingBottom,
   width,
+  members,
 }) => {
   return (
     <Section
@@ -47,6 +41,8 @@ const Team: types.Brick<TeamProps> = ({
       >
         {withTitle && (
           <TitleSubtitle
+            title={title}
+            subtitle={subtitle}
             className={classNames(bigCenteredTitle ? "mb-12" : "mb-8")}
             bigCentered={bigCenteredTitle}
           />
@@ -59,76 +55,15 @@ const Team: types.Brick<TeamProps> = ({
             }
           )}
         >
-          <Repeater propName="members" />
+          <Repeater
+            propName="members"
+            items={members}
+            itemBuilder={(props) => <TeamItem {...props} />}
+          />
         </div>
       </Container>
     </Section>
   );
 };
-Team.schema = {
-  name: blockNames.Team,
-  label: "Team",
-  category: "team",
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Team/Team.tsx",
-  previewImageUrl: `/bricks-preview-images/${blockNames.Team}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    width: "small",
-    withTitle: true,
-    bigCenteredTitle: false,
-    title: "Meet our team",
-    subtitle:
-      "We are a group of passionate people with the mission to make content editing fun. For everybody.",
-    members: [
-      {
-        memberName: "Alvin Payne",
-        jobTitle: "Frontend Developer",
-        twitter: "alvin_payne",
-        linkedin: "alvin_payne",
-        picture: avatars.AVATAR_MALE,
-      },
-      {
-        memberName: "Catherine Smith",
-        jobTitle: "Backend Developer",
-        twitter: "catherine_smith",
-        linkedin: "catherine_smith",
-        github: "catherine_smith",
-        picture: avatars.AVATAR_FEMALE,
-      },
-    ],
-  }),
-  repeaterItems: [
-    {
-      name: "members",
-      itemType: blockNames.TeamItem,
-      itemLabel: "Member",
-      min: 0,
-      max: 20,
-    },
-  ],
-  sideEditProps: [
-    {
-      groupName: "Team",
-      defaultOpen: true,
-      props: [
-        {
-          name: "withTitle",
-          label: "With title",
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: "bigCenteredTitle",
-          label: "Big centered",
-          type: types.SideEditPropType.Boolean,
-          show: (props) => !!props.withTitle,
-        },
-      ],
-    },
-    neutralBackgroundSideGroup,
-    paddingBordersSideGroup,
-    containerWidthSideGroup,
-  ],
-};
+
 export default Team;

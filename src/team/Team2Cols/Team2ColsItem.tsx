@@ -1,10 +1,8 @@
-import classNames from "classnames";
 import React from "react";
-import { Text, Image, types, Plain } from "react-bricks/frontend";
+import classNames from "classnames";
+import { Text, Image, types, Plain } from "../../shared";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
-import { avatars } from "../../shared/defaultImages";
 
 export interface Team2ColsItemProps {
   title?: string;
@@ -17,7 +15,10 @@ export interface Team2ColsItemProps {
 }
 
 const Team2ColsItem: types.Brick<Team2ColsItemProps> = ({
+  title,
   name,
+  picture,
+  jobTitle,
   twitter,
   linkedin,
   github,
@@ -25,6 +26,7 @@ const Team2ColsItem: types.Brick<Team2ColsItemProps> = ({
   return (
     <li className="flex space-x-4">
       <Image
+        source={picture}
         alt={typeof name === "string" ? name : Plain.serialize(name as any)}
         propName="picture"
         aspectRatio={1}
@@ -40,6 +42,7 @@ const Team2ColsItem: types.Brick<Team2ColsItemProps> = ({
           )}
           placeholder="Name..."
           propName="name"
+          value={name}
         />
         <Text
           renderBlock={(props) => (
@@ -49,6 +52,7 @@ const Team2ColsItem: types.Brick<Team2ColsItemProps> = ({
           )}
           placeholder="Job title..."
           propName="jobTitle"
+          value={jobTitle}
         />
         <div className="flex flex-row items-center space-x-2">
           {twitter && (
@@ -100,43 +104,6 @@ const Team2ColsItem: types.Brick<Team2ColsItemProps> = ({
       </div>
     </li>
   );
-};
-
-Team2ColsItem.schema = {
-  name: blockNames.Team2ColsItem,
-  label: "Member",
-  category: "team",
-  hideFromAddMenu: true,
-  // tags: [],
-
-  // Defaults when a new brick is added
-  getDefaultProps: () => ({
-    title: "Thick as a brick",
-    name: "Alvin Payne",
-    jobTitle: "Frontend Developer",
-    twitter: "alvin_payne",
-    linkedin: "alvin_payne",
-    picture: avatars.AVATAR_MALE,
-  }),
-
-  // Sidebar Edit controls for props
-  sideEditProps: [
-    {
-      name: "twitter",
-      label: "Twitter UserName",
-      type: types.SideEditPropType.Text,
-    },
-    {
-      name: "linkedin",
-      label: "Linkedin UserName",
-      type: types.SideEditPropType.Text,
-    },
-    {
-      name: "github",
-      label: "Github UserName",
-      type: types.SideEditPropType.Text,
-    },
-  ],
 };
 
 export default Team2ColsItem;

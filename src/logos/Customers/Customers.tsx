@@ -1,16 +1,10 @@
-import classNames from "classnames";
 import React from "react";
-import { Repeater, types } from "react-bricks/frontend";
-import {
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-} from "../../LayoutSideProps";
-import { customers } from "../../shared/defaultImages";
-import blockNames from "../../blockNames";
-import { bgColors } from "../../colors";
+import classNames from "classnames";
+import { Repeater, types } from "../../shared";
+import { LayoutProps } from "../../LayoutSideProps";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
+import Customer from "./CustomerItem";
 
 export interface CustomersProps extends LayoutProps {
   grayscale?: boolean;
@@ -42,71 +36,16 @@ const Customers: types.Brick<CustomersProps> = ({
             }
           )}
         >
-          <Repeater propName="customers" itemProps={{ grayscale }} />
+          <Repeater
+            propName="customers"
+            items={customers}
+            itemBuilder={(props) => <Customer {...props} />}
+            itemProps={{ grayscale }}
+          />
         </div>
       </Container>
     </Section>
   );
-};
-
-Customers.schema = {
-  name: blockNames.Customers,
-  label: "Customers",
-  category: "logos",
-  tags: ["customers", "logos", "logo cloud"],
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Customers/Customers.tsx",
-  previewImageUrl: `/bricks-preview-images/${blockNames.Customers}.png`,
-  getDefaultProps: () => ({
-    backgroundColor: bgColors.WHITE.value,
-    paddingTop: "12",
-    paddingBottom: "12",
-    borderTop: "none",
-    borderBottom: "none",
-    grayscale: true,
-    customers: [
-      {
-        image: customers.WOOSMAP,
-      },
-      {
-        image: customers.CAPBASE,
-      },
-      {
-        image: customers.CASAVO,
-      },
-      {
-        image: customers.EVERFUND,
-      },
-      {
-        image: customers.NEOSKOP,
-      },
-    ],
-  }),
-  repeaterItems: [
-    {
-      name: "customers",
-      itemType: blockNames.Customer,
-      itemLabel: "Customer",
-      min: 0,
-      max: 12,
-    },
-  ],
-  sideEditProps: [
-    neutralBackgroundSideGroup,
-    paddingBordersSideGroup,
-    {
-      groupName: "Logos",
-      defaultOpen: true,
-      props: [
-        {
-          name: "grayscale",
-          label: "Greyscale",
-          type: types.SideEditPropType.Boolean,
-        },
-      ],
-    },
-  ],
 };
 
 export default Customers;

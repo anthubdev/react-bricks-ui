@@ -1,16 +1,9 @@
 import React from "react";
 import jsonp from "jsonp";
 import { validate } from "email-validator";
-import { types } from "react-bricks/frontend";
-import { RichText, Text } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
-
-import {
-  containerSizeEditProps,
-  LayoutProps,
-  neutralBackgroundColorsEditProps,
-  sectionDefaults,
-} from "../../LayoutSideProps";
+import { types } from "../../shared";
+import { RichText, Text } from "../../shared";
+import { LayoutProps } from "../../LayoutSideProps";
 import Section from "../../shared/components/Section";
 import Container from "../../shared/components/Container";
 import classNames from "classnames";
@@ -41,6 +34,10 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
   width = "small",
   mailchimpUrl,
   resultOkText = `Thanks,you're all signed up!`,
+  title,
+  text,
+  text2,
+  buttonText,
 }) => {
   const [email, setEmail] = React.useState("");
   const [status, setStatus] = React.useState<IStatus>({
@@ -131,9 +128,11 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
               )}
               placeholder="type a title..."
               propName="title"
+              value={title}
             />
             <RichText
               propName="text"
+              value={text}
               placeholder="Type a text..."
               renderBlock={(props) => (
                 <span
@@ -176,6 +175,7 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
                 >
                   <Text
                     propName="buttonText"
+                    value={buttonText}
                     placeholder="Action"
                     renderBlock={(props) => (
                       <span
@@ -200,6 +200,7 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
             <div>
               <RichText
                 propName="text2"
+                value={text2}
                 placeholder="Type a text..."
                 renderBlock={({ children }) => (
                   <p className="text-gray-500 dark:text-gray-300 text-sm leading-[18px] min-w-[100px]">
@@ -218,43 +219,6 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
       </Container>
     </Section>
   );
-};
-
-NewsletterSubscribe.schema = {
-  name: blockNames.NewsletterSubscribe,
-  label: "Newsletter subscribe",
-  category: "call to action",
-  hideFromAddMenu: false,
-  previewImageUrl: `/bricks-preview-images/${blockNames.NewsletterSubscribe}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    width: "small",
-    title: "Join our newsletter",
-    text: "Never miss our release and new blog articles.",
-    text2: "6,500 developers and counting",
-    buttonText: "Join",
-    mailchimpUrl: "",
-    provider: NewsletterProvider.MailChimp,
-    resultOkText: "",
-  }),
-  sideEditProps: [
-    {
-      groupName: "Newsletter",
-      defaultOpen: true,
-      props: [
-        neutralBackgroundColorsEditProps,
-        containerSizeEditProps,
-        {
-          name: "mailchimpUrl",
-          label: "Mailchimp Form URL",
-          type: types.SideEditPropType.Text,
-          validate: (value) =>
-            value && value.length > 10 && value.indexOf("https://") !== -1,
-          //&& value.indexOf('list-manage.com/subscribe/post?') !== -1,
-        },
-      ],
-    },
-  ],
 };
 
 export default NewsletterSubscribe;

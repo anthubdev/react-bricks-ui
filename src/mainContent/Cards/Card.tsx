@@ -1,26 +1,26 @@
-import classNames from "classnames";
 import React from "react";
-import { Node } from "slate";
-import { Plain, types } from "react-bricks/frontend";
-import { RichText, Text, Image, Link } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
+import classNames from "classnames";
+import { Plain, types } from "../../shared";
+import { RichText, Text, Image, Link } from "../../shared";
 import { textColors } from "../../colors";
-import { icons } from "../../shared/defaultImages";
 
 export interface CardProps {
-  withIcon: boolean;
+  withIcon?: boolean;
   icon?: types.IImageSource;
-  withTitle: boolean;
+  withTitle?: boolean;
   title?: string;
-  description?: string | Node[];
-  withLink: boolean;
+  description?: string | types.TextElement[];
+  withLink?: boolean;
   linkText?: string;
   linkPath?: string;
 }
 
 const Card: types.Brick<CardProps> = ({
   withIcon,
+  icon,
   withTitle,
+  title,
+  description,
   withLink,
   linkText,
   linkPath,
@@ -37,6 +37,7 @@ const Card: types.Brick<CardProps> = ({
       {withIcon && (
         <Image
           propName="icon"
+          source={icon}
           alt="logo"
           imageClassName={`text-left object-contain w-10 h-10 mr-5`}
         />
@@ -54,6 +55,7 @@ const Card: types.Brick<CardProps> = ({
             )}
             placeholder="Title..."
             propName="title"
+            value={title}
           />
         )}
         <RichText
@@ -69,6 +71,7 @@ const Card: types.Brick<CardProps> = ({
           )}
           placeholder="Description..."
           propName="description"
+          value={description}
         />
         {withLink && (
           <div className="mt-2">
@@ -84,6 +87,7 @@ const Card: types.Brick<CardProps> = ({
                   renderBlock={(props) => <p>{props.children}</p>}
                   placeholder="Link..."
                   propName="linkText"
+                  value={linkText}
                 />
               </div>
               <svg
@@ -106,45 +110,6 @@ const Card: types.Brick<CardProps> = ({
       </div>
     </div>
   );
-};
-
-Card.schema = {
-  name: blockNames.Card,
-  label: "Card",
-  category: "Main Content",
-  hideFromAddMenu: true,
-  getDefaultProps: () => ({
-    withIcon: true,
-    withTitle: true,
-    withLink: true,
-    icon: icons.TWITTER,
-    title: "Twitter",
-    description: "Get the latest event updates about React Bricks.",
-    linkText: "Follow us now",
-  }),
-  sideEditProps: [
-    {
-      name: "withIcon",
-      label: "With Icon",
-      type: types.SideEditPropType.Boolean,
-    },
-    {
-      name: "withTitle",
-      label: "With Title",
-      type: types.SideEditPropType.Boolean,
-    },
-    {
-      name: "withLink",
-      label: "With Link",
-      type: types.SideEditPropType.Boolean,
-    },
-    {
-      name: "linkPath",
-      label: "Link to",
-      type: types.SideEditPropType.Text,
-      show: ({ withLink }: types.Props) => !!withLink,
-    },
-  ],
 };
 
 export default Card;

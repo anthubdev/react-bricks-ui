@@ -1,24 +1,9 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Text,
-  types,
-  useAdminContext,
-  RichText,
-  Link,
-} from "react-bricks/frontend";
-import { Node } from "slate";
+import { Image, Text, types, RichText, Link } from "../../shared";
 import { FaTwitter } from "react-icons/fa";
 import Section from "../../shared/components/Section";
-import blockNames from "../../blockNames";
 import Container from "../../shared/components/Container";
-import {
-  containerWidthSideGroup,
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
+import { LayoutProps } from "../../LayoutSideProps";
 
 export interface TweetLightProps extends LayoutProps {
   tweetLink: string;
@@ -26,13 +11,18 @@ export interface TweetLightProps extends LayoutProps {
   author?: types.IImageSource;
   authorName?: string;
   authorTwitterHandle?: string;
-  tweetContent?: string | Node[];
+  tweetContent?: string | types.TextElement[];
   date?: string;
 }
 
 const TweetLight: types.Brick<TweetLightProps> = ({
   tweetLink,
   authorLink,
+  author,
+  authorName,
+  authorTwitterHandle,
+  tweetContent,
+  date,
   backgroundColor,
   borderTop,
   borderBottom,
@@ -40,13 +30,9 @@ const TweetLight: types.Brick<TweetLightProps> = ({
   paddingBottom,
   width,
 }) => {
-  const { isAdmin, previewMode } = useAdminContext();
   const [isMouseOver, setIsMouseOver] = useState(false);
 
   const handleClick = (tweetLink: string) => (event: React.MouseEvent) => {
-    if (isAdmin && !previewMode) {
-      return event.preventDefault();
-    }
     if (typeof window !== undefined) {
       window.open(tweetLink);
     }
@@ -83,6 +69,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
                 <div className="mr-2 w-12 h-12">
                   <Image
                     propName="author"
+                    source={author}
                     alt="author-name"
                     imageClassName="rounded-full filter hover:brightness-90"
                   />
@@ -90,6 +77,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
                 <div className="group">
                   <Text
                     propName="authorName"
+                    value={authorName}
                     placeholder="Author Name"
                     renderBlock={({ children }) => (
                       <div className="text-md text-gray-900 font-bold leading-tight group-hover:underline dark:text-neutral-300">
@@ -99,6 +87,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
                   />
                   <Text
                     propName="authorTwitterHandle"
+                    value={authorTwitterHandle}
                     placeholder="Author @"
                     renderBlock={({ children }) => (
                       <div className="text-sm text-gray-500 font-medium tracking-tight">
@@ -117,6 +106,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
             </div>
             <RichText
               propName="tweetContent"
+              value={tweetContent}
               placeholder="tweet content"
               renderBlock={({ children }) => (
                 <div className="mb-2 text-xl font-medium leading-tight dark:text-neutral-300">
@@ -142,6 +132,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
 
             <Text
               propName="date"
+              value={date}
               placeholder="Date"
               renderBlock={({ children }) => (
                 <div className="inline-block font-normal text-gray-500 tracking-tight hover:underline">
@@ -154,91 +145,6 @@ const TweetLight: types.Brick<TweetLightProps> = ({
       </Container>
     </Section>
   );
-};
-
-TweetLight.schema = {
-  name: blockNames.TweetLight,
-  label: "Tweet light",
-  category: "single column / blog",
-  tags: ["tweet", "twitter", "light"],
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/blog/Tweet/TweetLight.tsx",
-  previewImageUrl: `/bricks-preview-images/${blockNames.TweetLight}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    width: "small",
-    authorName: "John Doe",
-    author: {
-      src: "https://images.reactbricks.com/original/b21a4d81-5354-48b5-88bf-89dc9ed6f302.svg",
-      placeholderSrc:
-        "https://images.reactbricks.com/original/b21a4d81-5354-48b5-88bf-89dc9ed6f302.svg",
-      srcSet: "",
-      width: 1249.24,
-      height: 1249.24,
-      alt: "Author name",
-      seoName: "author",
-    },
-    tweetLink: "https://twitter.com/matfrana/status/1237840583982329857",
-    authorLink: "https://twitter.com/matfrana",
-    authorTwitterHandle: "@JohnDoe",
-    tweetContent: [
-      {
-        type: "paragraph",
-        children: [
-          {
-            text: "Lorem ipsum dolor sit amet ",
-          },
-          {
-            type: "link",
-            url: "https://twitter.com/ReactBricks",
-            children: [
-              {
-                text: "@ReactBricks",
-              },
-            ],
-          },
-          {
-            text: "",
-          },
-        ],
-      },
-    ],
-    date: "10:18 · Jan 04, 2022",
-  }),
-  sideEditProps: [
-    {
-      groupName: "Tweet",
-      props: [
-        {
-          name: "helper",
-          label: "Why Tweet light?",
-          type: types.SideEditPropType.Custom,
-          component: () => (
-            <div className="text-sm">
-              This is a light version of the Tweet content block: it
-              doesn&apos;t load the Twitter JavaScript, so it is much better
-              performance-wise, but it requires manually entering the Tweet
-              content and properties.
-            </div>
-          ),
-        },
-        {
-          name: "tweetLink",
-          label: "Tweet Link",
-          type: types.SideEditPropType.Text,
-        },
-        {
-          name: "authorLink",
-          label: "Author Link",
-          type: types.SideEditPropType.Text,
-        },
-      ],
-    },
-    neutralBackgroundSideGroup,
-    paddingBordersSideGroup,
-    containerWidthSideGroup,
-  ],
 };
 
 export default TweetLight;

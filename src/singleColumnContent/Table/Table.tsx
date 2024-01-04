@@ -1,16 +1,9 @@
 import React from "react";
-import { Repeater, types } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
-import {
-  containerWidthSideGroup,
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
+import { Repeater, types } from "../../shared";
+import { LayoutProps } from "../../LayoutSideProps";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import { TableRowProps } from "./TableRow";
+import TableRow, { TableRowProps } from "./TableRow";
 
 export interface TableProps extends LayoutProps {
   striped: boolean;
@@ -29,6 +22,7 @@ const Table: types.Brick<TableProps> = ({
   paddingTop,
   paddingBottom,
   width,
+  rows,
 }) => {
   return (
     <Section
@@ -44,6 +38,8 @@ const Table: types.Brick<TableProps> = ({
         <table className="w-full border-collapse border-spacing-0.5 sm:overflow-x-auto">
           <Repeater
             propName="rows"
+            items={rows}
+            itemBuilder={(props) => <TableRow {...props} />}
             itemProps={{
               striped,
               withHeader,
@@ -54,180 +50,6 @@ const Table: types.Brick<TableProps> = ({
       </Container>
     </Section>
   );
-};
-
-Table.schema = {
-  name: blockNames.Table,
-  label: "Table",
-  category: "single column / blog",
-  tags: ["table"],
-  repeaterItems: [
-    {
-      name: "rows",
-      itemType: blockNames.TableRow,
-      min: 1,
-    },
-  ],
-  previewImageUrl: `/bricks-preview-images/${blockNames.Table}.png`,
-  sideEditProps: [
-    {
-      groupName: "Table",
-      defaultOpen: true,
-      props: [
-        {
-          name: "withHeader",
-          label: "With header?",
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: "striped",
-          label: "Striped?",
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: "borders",
-          label: "Borders",
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Radio,
-            options: [
-              { value: "none", label: "None" },
-              { value: "horizontal", label: "Horizontal" },
-              { value: "all", label: "All" },
-            ],
-          },
-        },
-      ],
-    },
-    neutralBackgroundSideGroup,
-    paddingBordersSideGroup,
-    containerWidthSideGroup,
-  ],
-
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    width: "small",
-    striped: true,
-    withHeader: true,
-    borders: "horizontal",
-    rows: [
-      {
-        cells: [
-          {
-            cellText: "",
-          },
-          {
-            cellText: "Monolithic CMS",
-            textAlign: "center",
-          },
-          {
-            cellText: "Headless CMS",
-            textAlign: "center",
-          },
-          {
-            cellText: "Webflow",
-            textAlign: "center",
-          },
-          {
-            cellText: "React Bricks",
-            textAlign: "center",
-          },
-        ],
-      },
-      {
-        cells: [
-          {
-            cellText: "Easy for editors",
-          },
-          {
-            cellText: "It depends",
-            textAlign: "center",
-          },
-          {
-            cellText: "",
-            textAlign: "center",
-          },
-          {
-            cellText: "Almost",
-            textAlign: "center",
-          },
-          {
-            cellText: "✅",
-            textAlign: "center",
-          },
-        ],
-      },
-      {
-        cells: [
-          {
-            cellText: "Flexible for developers",
-          },
-          {
-            cellText: "",
-            textAlign: "center",
-          },
-          {
-            cellText: "✅",
-            textAlign: "center",
-          },
-          {
-            cellText: "",
-            textAlign: "center",
-          },
-          {
-            cellText: "✅",
-            textAlign: "center",
-          },
-        ],
-      },
-      {
-        cells: [
-          {
-            cellText: "Provides a method",
-          },
-          {
-            cellText: "",
-            textAlign: "center",
-          },
-          {
-            cellText: "",
-            textAlign: "center",
-          },
-          {
-            cellText: "✅",
-            textAlign: "center",
-          },
-          {
-            cellText: "✅",
-            textAlign: "center",
-          },
-        ],
-      },
-      {
-        cells: [
-          {
-            cellText: "Safe design system",
-          },
-          {
-            cellText: "It depends",
-            textAlign: "center",
-          },
-          {
-            cellText: "",
-            textAlign: "center",
-          },
-          {
-            cellText: "",
-            textAlign: "center",
-          },
-          {
-            cellText: "✅",
-            textAlign: "center",
-          },
-        ],
-      },
-    ],
-  }),
 };
 
 export default Table;

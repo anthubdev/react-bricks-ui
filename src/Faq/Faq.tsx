@@ -1,16 +1,9 @@
 import React from "react";
-import { Repeater, types } from "react-bricks/frontend";
-import {
-  containerWidthSideGroup,
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../LayoutSideProps";
-import blockNames from "../blockNames";
+import { Repeater, types } from "../shared";
+import { LayoutProps } from "../LayoutSideProps";
 import Container from "../shared/components/Container";
 import Section from "../shared/components/Section";
-import { FaqQuestionProps } from "./FaqItem";
+import FaqQuestion, { FaqQuestionProps } from "./FaqItem";
 
 export interface FaqProps extends LayoutProps {
   faqs: FaqQuestionProps[];
@@ -23,6 +16,7 @@ const Faq: types.Brick<FaqProps> = ({
   paddingTop,
   paddingBottom,
   width,
+  faqs,
 }) => {
   return (
     <Section
@@ -36,46 +30,14 @@ const Faq: types.Brick<FaqProps> = ({
         paddingBottom={paddingBottom}
         className="flex flex-col space-y-12"
       >
-        <Repeater propName="faqs" />
+        <Repeater
+          propName="faqs"
+          items={faqs}
+          itemBuilder={(props) => <FaqQuestion {...props} />}
+        />
       </Container>
     </Section>
   );
-};
-
-Faq.schema = {
-  name: blockNames.Faqs,
-  label: "FAQ",
-  category: "faq",
-  tags: ["frequently asked questions", "faq"],
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Faq/Faq.tsx",
-  previewImageUrl: `/bricks-preview-images/${blockNames.Faqs}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    borderTop: "full",
-    width: "small",
-    faqs: [
-      {
-        id: "",
-        question: "Why you should change your CMS today?",
-        answer:
-          "Because you care about your content creators and you are looking for a top developer experience, with a future-proof solution.",
-      },
-    ],
-  }),
-  repeaterItems: [
-    {
-      name: "faqs",
-      itemType: blockNames.Faq,
-      itemLabel: "Question",
-    },
-  ],
-  sideEditProps: [
-    neutralBackgroundSideGroup,
-    paddingBordersSideGroup,
-    containerWidthSideGroup,
-  ],
 };
 
 export default Faq;

@@ -1,16 +1,8 @@
 import React from "react";
-import { Image, types } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
+import { Image, types } from "../../shared";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import { photos } from "../../shared/defaultImages";
-import {
-  containerWidthSideGroup,
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
+import { LayoutProps } from "../../LayoutSideProps";
 
 export interface BigImageProps extends LayoutProps {
   image: types.IImageSource;
@@ -23,6 +15,7 @@ const BigImage: types.Brick<BigImageProps> = ({
   paddingTop,
   paddingBottom,
   width,
+  image,
 }) => {
   return (
     <Section
@@ -35,30 +28,10 @@ const BigImage: types.Brick<BigImageProps> = ({
         paddingTop={paddingTop}
         paddingBottom={paddingBottom}
       >
-        <Image propName="image" alt="Image" maxWidth={1200} />
+        <Image propName="image" source={image} alt="Image" maxWidth={1200} />
       </Container>
     </Section>
   );
-};
-
-BigImage.schema = {
-  name: blockNames.BigImage,
-  label: "Image",
-  category: "single column / blog",
-  tags: ["blog", "image", "single image"],
-  previewImageUrl: `/bricks-preview-images/${blockNames.BigImage}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    width: "small",
-    paddingTop: "12",
-    paddingBottom: "12",
-    image: photos.SEASIDE,
-  }),
-  sideEditProps: [
-    neutralBackgroundSideGroup,
-    paddingBordersSideGroup,
-    containerWidthSideGroup,
-  ],
 };
 
 export default BigImage;

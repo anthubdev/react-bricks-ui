@@ -1,23 +1,26 @@
 import React from "react";
 import classNames from "classnames";
-
-import { Text, RichText, types, Link } from "react-bricks/frontend";
+import { Text, RichText, types, Link } from "../shared";
 import { textColors } from "../colors";
-import blockNames from "../blockNames";
 
 export interface FaqQuestionProps {
-  id: string;
+  id?: string;
   question?: string;
   answer?: string;
 }
 
-const FaqQuestion: types.Brick<FaqQuestionProps> = ({ id }) => {
+const FaqQuestion: types.Brick<FaqQuestionProps> = ({
+  id,
+  question,
+  answer,
+}) => {
   const idAttribute = id ? { id } : {};
 
   return (
     <div className="leading-6">
       <Text
         propName="question"
+        value={question}
         renderBlock={(props) => (
           <h3
             {...idAttribute}
@@ -49,6 +52,7 @@ const FaqQuestion: types.Brick<FaqQuestionProps> = ({ id }) => {
       />
       <RichText
         propName="answer"
+        value={answer}
         renderBlock={(props) => (
           <p className={textColors.GRAY_800} {...props.attributes}>
             {props.children}
@@ -67,28 +71,6 @@ const FaqQuestion: types.Brick<FaqQuestionProps> = ({ id }) => {
       />
     </div>
   );
-};
-
-FaqQuestion.schema = {
-  name: blockNames.Faq,
-  label: "Question",
-  category: "faq",
-  hideFromAddMenu: true,
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Faq/FaqItem.tsx",
-  getDefaultProps: () => ({
-    question: "Is this the latest question?",
-    answer:
-      "This is either the first question or the one following the one before it. It is the last question if you did't add other questions after it.",
-  }),
-  sideEditProps: [
-    {
-      name: "id",
-      label: "Anchor ID",
-      type: types.SideEditPropType.Text,
-    },
-  ],
 };
 
 export default FaqQuestion;

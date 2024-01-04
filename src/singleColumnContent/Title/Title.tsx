@@ -1,13 +1,6 @@
 import React from "react";
-import { types } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
-import {
-  containerWidthSideGroup,
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
+import { types } from "../../shared";
+import { LayoutProps } from "../../LayoutSideProps";
 import Container, { Padding, Size } from "../../shared/components/Container";
 import Section, { Border } from "../../shared/components/Section";
 import TitleSubtitle from "../../shared/components/TitleSubtitle";
@@ -36,6 +29,8 @@ const Title: types.Brick<TitleProps> = ({
   paddingTop,
   paddingBottom,
   width,
+  title,
+  subtitle,
 }) => {
   return (
     <Section
@@ -49,54 +44,14 @@ const Title: types.Brick<TitleProps> = ({
         paddingBottom={paddingBottom}
       >
         <TitleSubtitle
+          title={title}
+          subtitle={subtitle}
           bigCentered={bigCentered}
           extraboldTitle={extraboldTitle}
         />
       </Container>
     </Section>
   );
-};
-
-Title.schema = {
-  name: blockNames.Title,
-  label: "Title",
-  category: "single column / blog",
-  tags: ["title"],
-  previewImageUrl: `/bricks-preview-images/${blockNames.Title}.png`,
-  // Defaults when a new brick is added
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    width: "small",
-    paddingTop: "0",
-    paddingBottom: "0",
-    title: "Thick as a brick",
-    subtitle: "All in all you're just another brick in the page",
-    bigCentered: true,
-    extraboldTitle: false,
-  }),
-
-  // Sidebar Edit controls for props
-  sideEditProps: [
-    neutralBackgroundSideGroup,
-    paddingBordersSideGroup,
-    containerWidthSideGroup,
-    {
-      groupName: "Text",
-      defaultOpen: true,
-      props: [
-        {
-          name: "bigCentered",
-          label: "Big centered",
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: "extraboldTitle",
-          label: "Extra bold Title",
-          type: types.SideEditPropType.Boolean,
-        },
-      ],
-    },
-  ],
 };
 
 export default Title;

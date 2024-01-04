@@ -1,16 +1,14 @@
 import React from "react";
 import classNames from "classnames";
-import { types } from "react-bricks/frontend";
-import { Text, Image, Link } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
+import { types } from "../../shared";
+import { Text, Image, Link } from "../../shared";
 import { textColors } from "../../colors";
-import { icons } from "../../shared/defaultImages";
 
 export interface LinkCardProps {
-  withIcon: boolean;
+  withIcon?: boolean;
   withTitle?: boolean;
-  withLink: boolean;
-  linkPath: string;
+  withLink?: boolean;
+  linkPath?: string;
   icon?: types.IImageSource;
   title?: string;
   text?: string;
@@ -20,11 +18,14 @@ const LinkCard: types.Brick<LinkCardProps> = ({
   withIcon,
   withTitle,
   linkPath,
+  title,
+  text,
+  icon,
 }) => {
   return (
     <div>
       <Link
-        href={linkPath}
+        href={linkPath || ""}
         className={classNames(
           "flex items-center border border-black/10 dark:border-white/10 bg-white dark:bg-white/10 p-5 rounded group hover:-translate-y-[3px] hover:border-sky-500/50 hover:shadow-lg hover:text-sky-600 transition-all ease-out duration-150",
           textColors.GRAY_800
@@ -33,6 +34,7 @@ const LinkCard: types.Brick<LinkCardProps> = ({
         {withIcon && (
           <Image
             propName="icon"
+            source={icon}
             alt="logo"
             imageClassName={`w-10 h-10 object-contain ml-0.5 mr-4`}
           />
@@ -46,6 +48,7 @@ const LinkCard: types.Brick<LinkCardProps> = ({
               )}
               placeholder="Title..."
               propName="title"
+              value={title}
             />
           )}
 
@@ -53,43 +56,12 @@ const LinkCard: types.Brick<LinkCardProps> = ({
             renderBlock={(props) => <div>{props.children}</div>}
             placeholder="Text..."
             propName="text"
+            value={text}
           />
         </div>
       </Link>
     </div>
   );
-};
-
-LinkCard.schema = {
-  name: blockNames.LinkCard,
-  label: "Card",
-  category: "Main Content",
-  hideFromAddMenu: true,
-  getDefaultProps: () => ({
-    withIcon: true,
-    withTitle: true,
-    icon: icons.PHOTO_STACK,
-    title: "Visual editing",
-    text: "The best UX on the market, no training required.",
-    linkPath: "/",
-  }),
-  sideEditProps: [
-    {
-      name: "withIcon",
-      label: "With Icon",
-      type: types.SideEditPropType.Boolean,
-    },
-    {
-      name: "withTitle",
-      label: "With Title",
-      type: types.SideEditPropType.Boolean,
-    },
-    {
-      name: "linkPath",
-      label: "Link to",
-      type: types.SideEditPropType.Text,
-    },
-  ],
 };
 
 export default LinkCard;

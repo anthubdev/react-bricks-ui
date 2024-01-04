@@ -1,19 +1,11 @@
 import React from "react";
-import { Link, RichText, types } from "react-bricks/frontend";
-import { Node } from "slate";
-import blockNames from "../../blockNames";
+import { Link, RichText, types } from "../../shared";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import {
-  containerWidthSideGroup,
-  LayoutProps,
-  neutralBackgroundSideGroup,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
+import { LayoutProps } from "../../LayoutSideProps";
 
 export interface ParagraphProps extends LayoutProps {
-  text?: string | Node[];
+  text?: string | types.TextElement[];
 }
 
 const Paragraph: types.Brick<ParagraphProps> = ({
@@ -23,6 +15,7 @@ const Paragraph: types.Brick<ParagraphProps> = ({
   paddingTop,
   paddingBottom,
   width,
+  text,
 }) => {
   return (
     <Section
@@ -37,6 +30,7 @@ const Paragraph: types.Brick<ParagraphProps> = ({
       >
         <RichText
           propName="text"
+          value={text}
           placeholder="Paragraph..."
           renderBlock={({ children }) => (
             <p className="text-base leading-7 mt-6 mb-6 text-gray-800 dark:text-gray-100">
@@ -90,46 +84,6 @@ const Paragraph: types.Brick<ParagraphProps> = ({
       </Container>
     </Section>
   );
-};
-
-Paragraph.schema = {
-  name: blockNames.Paragraph,
-  label: "Paragraph",
-  category: "single column / blog",
-  tags: ["blog", "paragraph", "text"],
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/blog/Paragraph/Paragraph.tsx",
-  previewImageUrl: `/bricks-preview-images/${blockNames.Paragraph}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    width: "small",
-    paddingTop: "0",
-    paddingBottom: "0",
-    text: [
-      {
-        type: "h2",
-        children: [
-          {
-            text: "Lorem ipsum dolor sit title",
-          },
-        ],
-      },
-      {
-        type: "paragraph",
-        children: [
-          {
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat sagittis faucibus.",
-          },
-        ],
-      },
-    ],
-  }),
-  sideEditProps: [
-    neutralBackgroundSideGroup,
-    paddingBordersSideGroup,
-    containerWidthSideGroup,
-  ],
 };
 
 export default Paragraph;

@@ -5,7 +5,7 @@ import {
   types,
   useAdminContext,
   useReactBricksContext,
-} from "react-bricks/frontend";
+} from "../../shared";
 import Container from "./Container";
 export type Border = "full" | "boxed" | "none";
 

@@ -1,19 +1,20 @@
 import React from "react";
-import { Image, Plain, Text, types } from "react-bricks/frontend";
-import { avatars } from "../../shared/defaultImages";
-import blockNames from "../../blockNames";
+import { Image, Plain, Text, types } from "../../shared";
 import { textColors } from "../../colors";
 
 export interface Testimonial3ColsItemProps {
-  authorName: string;
-  authorJobTitle: string;
-  avatarImage: types.IImageSource;
+  authorName?: string;
+  authorJobTitle?: string;
+  avatarImage?: types.IImageSource;
   logoImage?: types.IImageSource;
   quote?: string;
 }
 
 const Testimonial3ColsItem: types.Brick<Testimonial3ColsItemProps> = ({
   authorName,
+  authorJobTitle,
+  avatarImage,
+  quote,
 }) => {
   return (
     <div>
@@ -28,6 +29,7 @@ const Testimonial3ColsItem: types.Brick<Testimonial3ColsItemProps> = ({
           return <span>{props.children}</span>;
         }}
         propName="quote"
+        value={quote}
       />
       <cite className="flex items-center not-italic">
         <Image
@@ -37,6 +39,7 @@ const Testimonial3ColsItem: types.Brick<Testimonial3ColsItemProps> = ({
               : Plain.serialize(authorName)
           }
           propName="avatarImage"
+          source={avatarImage}
           aspectRatio={1}
           imageClassName="rounded-full w-10 h-10 object-contain"
         />
@@ -50,6 +53,7 @@ const Testimonial3ColsItem: types.Brick<Testimonial3ColsItemProps> = ({
             )}
             placeholder="Name..."
             propName="authorName"
+            value={authorName}
           />
           <Text
             renderBlock={(props) => (
@@ -59,24 +63,12 @@ const Testimonial3ColsItem: types.Brick<Testimonial3ColsItemProps> = ({
             )}
             placeholder="Job title..."
             propName="authorJobTitle"
+            value={authorJobTitle}
           />
         </div>
       </cite>
     </div>
   );
-};
-
-Testimonial3ColsItem.schema = {
-  name: blockNames.Testimonial3ColsItem,
-  label: "Single Testimonial",
-  category: "testimonials",
-  hideFromAddMenu: true,
-  getDefaultProps: () => ({
-    quote: "I'm smart enough to know that I'm dumb.",
-    authorName: "Richard Feynman",
-    authorJobTitle: "Theoretical physicist",
-    avatarImage: avatars.PLACEHOLDER1,
-  }),
 };
 
 export default Testimonial3ColsItem;

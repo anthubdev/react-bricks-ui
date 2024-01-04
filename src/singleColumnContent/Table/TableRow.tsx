@@ -1,17 +1,14 @@
 import React from "react";
 import classNames from "classnames";
-import { Repeater, types } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
-import { TableCellProps } from "./TableCell";
+import { Repeater, types } from "../../shared";
+import TableCell, { TableCellProps } from "./TableCell";
 
 export interface TableRowProps {
   index?: number;
   striped?: boolean;
   withHeader?: boolean;
   borders?: "none" | "horizontal" | "all";
-  cells:
-    | TableCellProps[]
-    | { id?: string; type: string; props: TableCellProps }[];
+  cells?: TableCellProps[];
 }
 
 const TableRow: types.Brick<TableRowProps> = ({
@@ -19,6 +16,7 @@ const TableRow: types.Brick<TableRowProps> = ({
   striped = false,
   withHeader = true,
   borders = "horizontal",
+  cells,
 }) => {
   if (withHeader && index === 0) {
     return (
@@ -26,6 +24,8 @@ const TableRow: types.Brick<TableRowProps> = ({
         <tr className="align-middle">
           <Repeater
             propName="cells"
+            items={cells}
+            itemBuilder={(props) => <TableCell {...props} />}
             itemProps={{
               isHeader: true,
               borders,
@@ -50,38 +50,15 @@ const TableRow: types.Brick<TableRowProps> = ({
             : "bg-white dark:bg-gray-900"
         )}
       >
-        <Repeater propName="cells" itemProps={{ borders }} />
+        <Repeater
+          propName="cells"
+          items={cells}
+          itemBuilder={(props) => <TableCell {...props} />}
+          itemProps={{ borders }}
+        />
       </tr>
     </tbody>
   );
-};
-
-TableRow.schema = {
-  name: blockNames.TableRow,
-  label: "Row",
-  category: "single column / blog",
-  hideFromAddMenu: true,
-
-  getDefaultProps: () => ({
-    cells: [
-      {
-        text: "Cell",
-      },
-      {
-        text: "Cell",
-      },
-    ],
-  }),
-
-  repeaterItems: [
-    {
-      name: "cells",
-      itemType: blockNames.TableCell,
-      min: 1,
-    },
-  ],
-
-  sideEditProps: [],
 };
 
 export default TableRow;

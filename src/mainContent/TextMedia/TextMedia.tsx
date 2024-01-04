@@ -1,27 +1,17 @@
 import classNames from "classnames";
 import React from "react";
-import { Image, Link, Repeater, RichText, types } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
-import {
-  buttonColors,
-  highlightBgColors,
-  highlightTextColors,
-  textColors,
-} from "../../colors";
+import { Image, Link, Repeater, RichText, types } from "../../shared";
+import { textColors } from "../../colors";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import {
-  backgroundSideGroup,
-  LayoutProps,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
-import { photos } from "../../shared/defaultImages";
+import { LayoutProps } from "../../LayoutSideProps";
 import Video from "../../shared/components/Video";
 import { BadgeProps } from "../../shared/bricks/Badge";
 import { TextMediaLogoProps } from "./TextMediaLogo";
 import { ButtonProps } from "../../shared/bricks/Button";
-import { BulletListItemProps } from "../../shared/bricks/BulletListItem";
+import BulletListItem, {
+  BulletListItemProps,
+} from "../../shared/bricks/BulletListItem";
 
 export interface TextMediaProps extends LayoutProps {
   mediaType: "image" | "multiple-images" | "video-file" | "video-streaming";
@@ -39,9 +29,9 @@ export interface TextMediaProps extends LayoutProps {
   title: string;
   text: string;
   imageSource?: types.IImageSource;
-  buttons?: ButtonProps[] | { id: string; type: string; props: ButtonProps }[];
+  buttons?: ButtonProps[];
   bulletListItems?: BulletListItemProps[];
-  badge?: BadgeProps[] | { id: string; type: string; props: BadgeProps }[];
+  badge?: BadgeProps[];
   logos?: TextMediaLogoProps[];
 }
 
@@ -63,6 +53,10 @@ const TextMedia: types.Brick<TextMediaProps> = ({
   mediaType,
   platform,
   videoId,
+  title,
+  text,
+  imageSource,
+  bulletListItems,
 }) => {
   const titleColor = textColors.GRAY_900;
   const textColor = textColors.GRAY_700;
@@ -96,6 +90,7 @@ const TextMedia: types.Brick<TextMediaProps> = ({
             />
             <RichText
               propName="title"
+              value={title}
               renderBlock={(props) => (
                 <h2
                   className={classNames(
@@ -117,6 +112,7 @@ const TextMedia: types.Brick<TextMediaProps> = ({
             />
             <RichText
               propName="text"
+              value={text}
               renderBlock={(props) => (
                 <p
                   className={classNames(
@@ -145,6 +141,8 @@ const TextMedia: types.Brick<TextMediaProps> = ({
             />
             <Repeater
               propName="bulletListItems"
+              items={bulletListItems}
+              itemBuilder={(props) => <BulletListItem {...props} />}
               itemProps={{
                 className: bigText ? "text-lg" : "text-base",
               }}
@@ -181,6 +179,7 @@ const TextMedia: types.Brick<TextMediaProps> = ({
             >
               <Image
                 propName="imageSource"
+                source={imageSource}
                 alt="Image"
                 imageClassName={classNames(
                   { "rounded-lg": isRounded },
@@ -215,267 +214,6 @@ const TextMedia: types.Brick<TextMediaProps> = ({
       </Container>
     </Section>
   );
-};
-
-TextMedia.schema = {
-  name: blockNames.TextMedia,
-  label: "Text Media",
-  category: "Main Content",
-  tags: ["text media", "text image", "text video", "text logos"],
-  previewIcon: (
-    <svg viewBox="0 0 10 10">
-      <circle cx={5} cy={5} r={4} fill="red"></circle>
-    </svg>
-  ),
-  previewImageUrl: `/bricks-preview-images/${blockNames.TextMedia}.png`,
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/TextMedia/TextMedia.tsx",
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    title: "Making content editing fun!",
-    text: "Our mission is making content editing fun, for everyone.",
-    imageSource: photos.DESK_MAC,
-    mediaType: "image",
-    imageSide: "right",
-    bigImage: false,
-    mobileImageTop: false,
-    mobileIcon: false,
-    hasShadow: false,
-    isRounded: false,
-    extraBoldTitle: true,
-    bigText: true,
-    heroSizeTitle: false,
-    bulletListItems: [
-      {
-        bulletColor: highlightBgColors.PINK.value,
-        text: "Marketing",
-      },
-      {
-        bulletColor: highlightBgColors.SKY.value,
-        text: "Developers",
-      },
-      {
-        bulletColor: highlightBgColors.GREEN.value,
-        text: "Designers",
-      },
-      {
-        bulletColor: highlightBgColors.AMBER.value,
-        text: "Enterprise",
-      },
-    ],
-  }),
-  sideEditProps: [
-    {
-      groupName: "Media",
-      defaultOpen: true,
-      props: [
-        {
-          name: "mediaType",
-          label: "Media type",
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Radio,
-            options: [
-              { value: "image", label: "Image" },
-              { value: "multiple-images", label: "Multiple logos" },
-              { value: "video-file", label: "Video (mp4 file)" },
-              { value: "video-streaming", label: "Video (streaming)" },
-            ],
-          },
-        },
-        {
-          name: "imageSide",
-          label: "Media side",
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Radio,
-            options: [
-              { value: "left", label: "Left" },
-              { value: "right", label: "Right" },
-            ],
-          },
-        },
-        {
-          name: "mobileImageTop",
-          label: "Media on top on mobile",
-          type: types.SideEditPropType.Boolean,
-        },
-      ],
-    },
-    {
-      groupName: "Image",
-      show: ({ mediaType }: types.Props) => mediaType === "image",
-      defaultOpen: false,
-      props: [
-        {
-          name: "bigImage",
-          label: "Big image (only right side)",
-          type: types.SideEditPropType.Boolean,
-          show: (props) =>
-            props.mediaType === "image" && props.imageSide === "right",
-        },
-        {
-          name: "mobileIcon",
-          label: "Show as icon on mobile",
-          type: types.SideEditPropType.Boolean,
-          show: (props) => props.mediaType === "image",
-        },
-        {
-          name: "hasShadow",
-          label: "Image shadow",
-          type: types.SideEditPropType.Boolean,
-          show: (props) => props.mediaType === "image",
-        },
-        {
-          name: "isRounded",
-          label: "Image rounded corners",
-          type: types.SideEditPropType.Boolean,
-          show: (props) => props.mediaType === "image",
-        },
-      ],
-    },
-    {
-      groupName: "video",
-      defaultOpen: true,
-      show: ({ mediaType }: types.Props) => mediaType === "video-streaming",
-      props: [
-        {
-          name: "platform",
-          label: "Video platform",
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Radio,
-            options: [
-              { value: "youtube", label: "YouTube" },
-              { value: "vimeo", label: "Vimeo" },
-            ],
-          },
-        },
-        {
-          name: "videoId",
-          label: 'Video ID (i.e. "L4NGrMRTY3M")',
-          type: types.SideEditPropType.Text,
-        },
-      ],
-    },
-    {
-      groupName: "video mp4",
-      show: ({ mediaType }: types.Props) => mediaType === "video-file",
-      props: [],
-    },
-    {
-      groupName: "Text",
-      props: [
-        {
-          name: "heroSizeTitle",
-          label: "Hero-size title",
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: "extraBoldTitle",
-          label: "Extrabold title",
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: "bigText",
-          label: "Big text",
-          type: types.SideEditPropType.Boolean,
-        },
-      ],
-    },
-    backgroundSideGroup,
-    paddingBordersSideGroup,
-  ],
-  repeaterItems: [
-    {
-      name: "badge",
-      itemType: blockNames.Badge,
-      itemLabel: "Badge",
-      min: 0,
-      max: 1,
-    },
-    {
-      name: "bulletListItems",
-      itemType: blockNames.BulletListItem,
-      itemLabel: "Feature",
-      min: 0,
-      max: 4,
-    },
-    {
-      name: "buttons",
-      itemType: blockNames.Button,
-      itemLabel: "Button",
-      min: 0,
-      max: 2,
-    },
-    {
-      name: "logos",
-      itemType: blockNames.TextMediaLogo,
-      itemLabel: "Logo",
-      min: 0,
-      max: 9,
-    },
-  ],
-  stories: [
-    {
-      id: "image-hero",
-      name: "Image Hero",
-      previewImageUrl: `/bricks-preview-images/image-hero.png`,
-      showAsBrick: true,
-      props: {
-        ...sectionDefaults,
-        title: "Add magic to your components",
-        text: "With little changes you can turn your React design system into visually editable content blocks your marketing will love.",
-        imageSource: photos.IMAGE_TEXT_STORY_HERO,
-        imageSide: "right",
-        bigImage: true,
-        mobileImageTop: false,
-        mobileIcon: false,
-        hasShadow: true,
-        isRounded: true,
-        extraBoldTitle: false,
-        bigText: false,
-        heroSizeTitle: true,
-        buttons: [
-          {
-            id: "6a41405a-4651-4899-b236-bc4f43cc1566",
-            type: "Button",
-            props: {
-              text: "Learn more",
-              href: "",
-              isTargetBlank: false,
-              buttonColor: buttonColors.PINK.value,
-              variant: "solid",
-            },
-          },
-          {
-            id: "25623fa5-f03d-4798-afef-7febb8aac580",
-            type: "Button",
-            props: {
-              text: "Sign up",
-              href: "",
-              isTargetBlank: false,
-              buttonColor: buttonColors.PINK.value,
-              variant: "outline",
-            },
-          },
-        ],
-        bulletListItems: [],
-        badge: [
-          {
-            id: "3fc7d1eb-8d3d-49d8-94d3-47807c449a7a",
-            type: "Badge",
-            props: {
-              text: "Design system",
-              badgeColor: highlightTextColors.LIME.value,
-            },
-          },
-        ],
-        logos: [],
-      },
-    },
-  ],
 };
 
 export default TextMedia;

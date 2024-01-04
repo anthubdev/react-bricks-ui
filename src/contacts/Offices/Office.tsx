@@ -1,17 +1,17 @@
 import React from "react";
-import { types, Text } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
+import { types, Text } from "../../shared";
 
 export interface OfficeProps {
   city?: any;
   address?: any;
 }
 
-const Office: types.Brick<OfficeProps> = ({}) => {
+const Office: types.Brick<OfficeProps> = ({ address, city }) => {
   return (
     <div className="py-3 pl-4 bg-gradient-to-r from-gray-50 via-transparent border-l border-gray-300 dark:from-transparent dark:border-gray-700">
       <Text
         propName="city"
+        value={city}
         placeholder="City..."
         renderBlock={(props) => (
           <h3
@@ -24,6 +24,7 @@ const Office: types.Brick<OfficeProps> = ({}) => {
       />
       <Text
         propName="address"
+        value={address}
         multiline={true}
         placeholder="Address..."
         renderBlock={(props) => (
@@ -39,17 +40,4 @@ const Office: types.Brick<OfficeProps> = ({}) => {
   );
 };
 
-Office.schema = {
-  name: blockNames.Office,
-  label: "Office",
-  category: "contact",
-  hideFromAddMenu: true,
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl: "",
-  getDefaultProps: () => ({
-    city: "San Francisco",
-    address: "3319 Harrison Street\nSan Francisco, CA",
-  }),
-  sideEditProps: [],
-};
 export default Office;

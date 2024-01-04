@@ -5,22 +5,15 @@ import {
   types,
   Link,
   useAdminContext,
-} from "react-bricks/frontend";
-import { useReactBricksContext } from "react-bricks/frontend";
+  useReactBricksContext,
+} from "../shared";
 import { FiMenu, FiX } from "react-icons/fi";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
-import blockNames from "../blockNames";
-import { bgColors, buttonColors } from "../colors";
-import {
-  backgroundColorsEditProps,
-  borderBottomEditProp,
-  LayoutProps,
-  sectionDefaults,
-} from "../LayoutSideProps";
+import { LayoutProps } from "../LayoutSideProps";
 import Section from "../shared/components/Section";
 import useOnClickOutside from "./useClickOutside";
-import { ButtonProps } from "../shared/bricks/Button";
-import { MenuItems } from "./HeaderMenuItem";
+import Button, { ButtonProps } from "../shared/bricks/Button";
+import HeaderMenuItem, { MenuItems } from "./HeaderMenuItem";
 
 export interface HeaderProps extends LayoutProps {
   menuItems: MenuItems[];
@@ -31,6 +24,9 @@ export interface HeaderProps extends LayoutProps {
 const Header: types.Brick<HeaderProps> = ({
   backgroundColor,
   borderBottom,
+  logo,
+  menuItems,
+  buttons,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isDarkColorMode, toggleColorMode } = useReactBricksContext();
@@ -69,6 +65,7 @@ const Header: types.Brick<HeaderProps> = ({
         >
           <Image
             propName="logo"
+            source={logo}
             alt="Logo"
             maxWidth={300}
             imageClassName="block w-32 h-7 object-contain object-left"
@@ -77,12 +74,16 @@ const Header: types.Brick<HeaderProps> = ({
         <div className="hidden lg:flex items-center space-x-2">
           <Repeater
             propName="menuItems"
+            items={menuItems}
+            itemBuilder={(props) => <HeaderMenuItem {...props} />}
             itemProps={{ mobileRef: ref, setMobileMenuOpen }}
           />
         </div>
         <div className="hidden lg:block ml-auto">
           <Repeater
             propName="buttons"
+            items={buttons}
+            itemBuilder={(props) => <Button {...props} />}
             // No local link to avoid prefetching
             // of the Admin bundle in case of link
             // to Edit content
@@ -131,6 +132,8 @@ const Header: types.Brick<HeaderProps> = ({
             <div className="absolute top-8 right-0 w-64 bg-white p-5 border rounded-lg shadow-lg z-10">
               <Repeater
                 propName="menuItems"
+                items={menuItems}
+                itemBuilder={(props) => <HeaderMenuItem {...props} />}
                 itemProps={{
                   mobileRef: ref,
                   setMobileMenuOpen,
@@ -142,138 +145,6 @@ const Header: types.Brick<HeaderProps> = ({
       </nav>
     </Section>
   );
-};
-
-Header.schema = {
-  name: blockNames.Header,
-  label: "Header",
-  category: "layout",
-  tags: ["header", "menu"],
-  previewImageUrl: `/bricks-preview-images/${blockNames.Header}.png`,
-  repeaterItems: [
-    {
-      name: "menuItems",
-      itemType: blockNames.HeaderMenuItem,
-      itemLabel: "Item",
-      min: 0,
-      max: 6,
-    },
-    {
-      name: "buttons",
-      itemType: blockNames.Button,
-      itemLabel: "Button",
-      min: 0,
-      max: 2,
-    },
-  ],
-  sideEditProps: [
-    {
-      groupName: "Layout",
-      defaultOpen: true,
-      props: [backgroundColorsEditProps, borderBottomEditProp],
-    },
-  ],
-  getDefaultProps: () => ({
-    backgroundColor: bgColors.WHITE.value,
-    borderBottom: "none",
-    menuItems: [
-      {
-        linkPath: "/",
-        linkText: "Home",
-      },
-      {
-        linkPath: "/about-us",
-        linkText: "About us",
-      },
-      {
-        linkPath: "",
-        linkText: "Features",
-        submenuItems: [
-          {
-            linkText: "Visual editing",
-            linkDescription:
-              "The best visual experience for your content editors",
-            linkPath: "/",
-          },
-        ],
-      },
-    ],
-    logo: {
-      src: "https://images.reactbricks.com/original/a63a73db-8df4-4a01-9084-44b8217332cf.svg",
-      placeholderSrc:
-        "https://images.reactbricks.com/original/a63a73db-8df4-4a01-9084-44b8217332cf.svg",
-      srcSet: "",
-      width: 450,
-      height: 100,
-      alt: "React Bricks",
-      seoName: "react-bricks",
-    },
-    buttons: [
-      {
-        type: "link",
-        text: "Edit content",
-        href: "/admin",
-        isTargetBlank: true,
-        buttonType: "submit",
-        buttonColor: buttonColors.SKY.value,
-        variant: "solid",
-        padding: "small",
-        simpleAnchorLink: true,
-      },
-    ],
-  }),
-  stories: [
-    {
-      id: "header-dark",
-      name: "Header dark",
-      previewImageUrl: `/bricks-preview-images/header-dark.png`,
-      showAsBrick: true,
-      props: {
-        ...sectionDefaults,
-        borderBottom: "none",
-        backgroundColor: bgColors.DARK_GRAY.value,
-        menuItems: [
-          {
-            linkPath: "/",
-            linkText: "Home",
-          },
-          {
-            linkPath: "/about-us",
-            linkText: "About us",
-          },
-        ],
-        logo: {
-          src: "https://images.reactbricks.com/original/881feb54-54af-46d5-8825-31e22ccbac25.webp",
-          placeholderSrc:
-            "https://images.reactbricks.com/placeholder/881feb54-54af-46d5-8825-31e22ccbac25.jpg",
-          srcSet:
-            "https://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-600.webp 600w,\nhttps://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-450.webp 450w,\nhttps://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-300.webp 300w,\nhttps://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-150.webp 150w,\nhttps://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-75.webp 75w",
-          width: 5314,
-          height: 1181,
-          alt: "React Bricks",
-          seoName: "react-bricks",
-          fallbackSrc:
-            "https://images.reactbricks.com/original/881feb54-54af-46d5-8825-31e22ccbac25.png",
-          fallbackSrcSet:
-            "https://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-600.png 600w,\nhttps://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-450.png 450w,\nhttps://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-300.png 300w,\nhttps://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-150.png 150w,\nhttps://images.reactbricks.com/src_set/881feb54-54af-46d5-8825-31e22ccbac25-75.png 75w",
-          fallbackType: "image/png",
-        },
-        buttons: [
-          {
-            type: "link",
-            text: "Edit content",
-            href: "/admin",
-            isTargetBlank: true,
-            buttonType: "submit",
-            buttonColor: buttonColors.SKY.value,
-            variant: "outline",
-            padding: "small",
-            simpleAnchorLink: true,
-          },
-        ],
-      },
-    },
-  ],
 };
 
 export default Header;

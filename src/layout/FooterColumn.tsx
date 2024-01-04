@@ -1,21 +1,19 @@
 import React from "react";
-import { Text, Repeater, types } from "react-bricks/frontend";
-import blockNames from "../blockNames";
+import { Text, Repeater, types } from "../shared";
 import { textColors } from "../colors";
-import { FooterLinkProps } from "./FooterLink";
+import FooterLink, { FooterLinkProps } from "./FooterLink";
 
 export interface FooterColumnProps {
   title?: string;
-  links?:
-    | FooterLinkProps[]
-    | { id?: string; type: string; props: FooterLinkProps }[];
+  links?: FooterLinkProps[];
 }
 
-const FooterColumn: types.Brick<FooterColumnProps> = (props) => {
+const FooterColumn: types.Brick<FooterColumnProps> = ({ title, links }) => {
   return (
     <div className="w-1/2 sm:w-auto sm:mr-8 mb-8">
       <Text
         propName="title"
+        value={title}
         placeholder="Title..."
         renderBlock={({ children }) => (
           <div
@@ -25,31 +23,13 @@ const FooterColumn: types.Brick<FooterColumnProps> = (props) => {
           </div>
         )}
       />
-      <Repeater propName="links" />
+      <Repeater
+        propName="links"
+        items={links}
+        itemBuilder={(props) => <FooterLink {...props} />}
+      />
     </div>
   );
-};
-
-FooterColumn.schema = {
-  name: blockNames.FooterColumn,
-  label: "Column",
-  category: "layout",
-  hideFromAddMenu: true,
-  // tags: [],
-  repeaterItems: [
-    {
-      name: "links",
-      itemType: blockNames.FooterLink,
-    },
-  ],
-
-  // Defaults when a new brick is added
-  getDefaultProps: () => ({
-    title: "Features",
-  }),
-
-  // Sidebar Edit controls for props
-  sideEditProps: [],
 };
 
 export default FooterColumn;

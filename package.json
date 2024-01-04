@@ -1,6 +1,6 @@
 {
   "name": "@antdev/react-bricks-ui",
-  "version": "1.0.15",
+  "version": "1.0.19",
   "description": "Open source bricks (content blocks)",
   "author": "AntDev",
   "license": "ISC",
@@ -14,13 +14,12 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "scripts",
     "package.json",
     "README.md"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c",
-    "postinstall": "node scripts/postinstall.js"
+    "dev": "rollup -c",
+    "build": "rimraf dist && rollup -c"
   },
   "peerDependencies": {
     "react": "^18",
@@ -30,13 +29,13 @@
     "dayjs": "^1.11.10",
     "email-validator": "^2.0.4",
     "jsonp": "^0.2.1",
-    "next-themes": "^0.2.1",
+    "pigeon-maps": "^0.21.3",
     "prismjs": "^1.29.0",
-    "react-bricks": "^4.1.3",
     "react-hook-form": "^7.49.2",
     "react-icons": "^4.12.0",
-    "react-query": "^3.39.3",
-    "react-slick": "^0.29.0"
+    "react-slick": "^0.29.0",
+    "slate": "^0.66.5",
+    "slate-react": "^0.66.6"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",

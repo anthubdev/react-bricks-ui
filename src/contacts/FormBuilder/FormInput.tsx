@@ -1,9 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import { types, Plain, Text } from "react-bricks/frontend";
+import { types, Plain, Text, useAdminContext } from "../../shared";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
-import blockNames from "../../blockNames";
-import { useAdminContext } from "react-bricks/frontend";
 import { textColors } from "../../colors";
 
 export interface FormInputProps {
@@ -152,82 +150,6 @@ const FormInput: types.Brick<FormInputProps> = ({
       )}
     </div>
   );
-};
-
-FormInput.schema = {
-  name: blockNames.FormInput,
-  label: "Input",
-  category: "contact",
-  hideFromAddMenu: true,
-  // tags: [],
-
-  getDefaultProps: () => ({
-    fieldName: "firstname",
-    isRequired: false,
-    inputType: "text",
-    columns: "2",
-    label: "First Name",
-    requiredError: "",
-    pattern: "",
-    patternError: "",
-  }),
-
-  sideEditProps: [
-    {
-      name: "columns",
-      label: "Columns",
-      type: types.SideEditPropType.Select,
-      selectOptions: {
-        display: types.OptionsDisplay.Radio,
-        options: [
-          { value: "1", label: "One" },
-          { value: "2", label: "Two" },
-        ],
-      },
-    },
-    {
-      name: "fieldName",
-      type: types.SideEditPropType.Text,
-      label: "Field Name",
-    },
-
-    {
-      name: "inputType",
-      type: types.SideEditPropType.Select,
-      label: "Input type",
-      selectOptions: {
-        display: types.OptionsDisplay.Radio,
-        options: [
-          { value: "text", label: "Text" },
-          { value: "number", label: "Number" },
-          { value: "date", label: "Date" },
-          { value: "password", label: "Password" },
-          { value: "email", label: "Email" },
-        ],
-      },
-    },
-    {
-      name: "isRequired",
-      type: types.SideEditPropType.Boolean,
-      label: "Field required",
-    },
-    {
-      name: "requiredError",
-      type: types.SideEditPropType.Text,
-      label: "Required error message",
-    },
-    {
-      name: "pattern",
-      type: types.SideEditPropType.Text,
-      label: "Pattern (RegEx)",
-      validate: (value: string) => isRegex(value) || "Invalid RegEx",
-    },
-    {
-      name: "patternError",
-      type: types.SideEditPropType.Text,
-      label: "Pattern error message",
-    },
-  ],
 };
 
 export default FormInput;

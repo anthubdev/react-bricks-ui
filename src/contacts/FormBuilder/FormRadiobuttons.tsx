@@ -1,9 +1,8 @@
-import classNames from "classnames";
 import React from "react";
-import { Repeater, types, Plain, Text } from "react-bricks/frontend";
+import classNames from "classnames";
+import { Repeater, types, Plain, Text } from "../../shared";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import { textColors } from "../../colors";
-import blockNames from "../../blockNames";
 
 export interface FormRadiobuttonsProps {
   register?: UseFormRegister<any>;
@@ -80,71 +79,6 @@ const FormRadiobuttons: types.Brick<FormRadiobuttonsProps> = ({
       )}
     </div>
   );
-};
-
-FormRadiobuttons.schema = {
-  name: blockNames.FormRadiobuttons,
-  label: "Radio buttons",
-  category: "contact",
-  hideFromAddMenu: true,
-
-  // Defaults when a new brick is added
-  getDefaultProps: () => ({
-    columns: "2",
-    fieldName: "color",
-    label: "Choose a color",
-    radiobuttons: [
-      {
-        label: "Blue",
-        value: "blue",
-      },
-      {
-        label: "Green",
-        value: "green",
-      },
-    ],
-    isRequired: false,
-  }),
-
-  repeaterItems: [
-    {
-      name: "radiobuttons",
-      itemType: blockNames.FormSingleRadio,
-      min: 1,
-    },
-  ],
-
-  // Sidebar Edit controls for props
-  sideEditProps: [
-    {
-      name: "columns",
-      label: "Columns",
-      type: types.SideEditPropType.Select,
-      selectOptions: {
-        display: types.OptionsDisplay.Radio,
-        options: [
-          { value: "1", label: "One" },
-          { value: "2", label: "Two" },
-        ],
-      },
-    },
-    {
-      name: "fieldName",
-      type: types.SideEditPropType.Text,
-      label: "Field Name",
-    },
-
-    {
-      name: "isRequired",
-      type: types.SideEditPropType.Boolean,
-      label: "Field required",
-    },
-    {
-      name: "requiredError",
-      type: types.SideEditPropType.Text,
-      label: "Required error message",
-    },
-  ],
 };
 
 export default FormRadiobuttons;

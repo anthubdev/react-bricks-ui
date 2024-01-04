@@ -1,15 +1,8 @@
 import React from "react";
-import { types } from "react-bricks/frontend";
-import blockNames from "../../blockNames";
-import Container, {  } from "../../shared/components/Container";
+import { types } from "../../shared";
+import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import {
-  backgroundColorsEditProps,
-  containerSizeEditPropsWithFull,
-  LayoutProps,
-  sectionPaddingsEditProps,
-} from "../../LayoutSideProps";
-import { bgColors } from "../../colors";
+import { LayoutProps } from "../../LayoutSideProps";
 
 interface HorizontalRuleProps extends LayoutProps {}
 
@@ -30,30 +23,6 @@ const HorizontalRule: types.Brick<HorizontalRuleProps> = ({
       </Container>
     </Section>
   );
-};
-
-HorizontalRule.schema = {
-  name: blockNames.HorizontalRule,
-  label: "Horizontal Rule",
-  category: "separator",
-  previewImageUrl: `/bricks-preview-images/${blockNames.HorizontalRule}.png`,
-  getDefaultProps: () => ({
-    backgroundColor: bgColors.WHITE.value,
-    width: "medium",
-    paddingTop: "16",
-    paddingBottom: "16",
-  }),
-  sideEditProps: [
-    {
-      groupName: "Layout",
-      defaultOpen: true,
-      props: [
-        backgroundColorsEditProps,
-        containerSizeEditPropsWithFull,
-        ...sectionPaddingsEditProps,
-      ],
-    },
-  ],
 };
 
 export default HorizontalRule;

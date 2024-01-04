@@ -1,13 +1,11 @@
 import React from "react";
-import { Image, types, Text, Link, Plain } from "react-bricks/frontend";
 import classNames from "classnames";
-import blockNames from "../../blockNames";
+import { Image, types, Text, Link, Plain } from "../../shared";
 import { textColors } from "../../colors";
 import { ColsNumber } from "./Features";
-import { icons } from "../../shared/defaultImages";
 
 export interface FeatureItemProps {
-  title: string;
+  title?: string;
   text?: string;
   image?: types.IImageSource;
   colsNumber?: ColsNumber;
@@ -34,6 +32,9 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
   withLink,
   linkText,
   linkPath,
+  image,
+  title,
+  text,
 }) => {
   const linkTextPlain =
     typeof linkText === "string"
@@ -45,6 +46,7 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
       {withIcon && (
         <Image
           propName="image"
+          source={image}
           alt="feature"
           aspectRatio={1}
           imageClassName="block w-12 h-12 object-contain"
@@ -61,6 +63,7 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
       <div className="overflow-hidden">
         <Text
           propName="title"
+          value={title}
           placeholder="Title..."
           renderBlock={(props) => (
             <div className={classNames("font-bold mb-1", textColors.GRAY_800)}>
@@ -70,6 +73,7 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
         />
         <Text
           propName="text"
+          value={text}
           placeholder="Text..."
           renderBlock={(props) => (
             <div className={textColors.GRAY_500}>{props.children}</div>
@@ -86,9 +90,10 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
             >
               <div>
                 <Text
+                  propName="linkText"
+                  value={linkText}
                   renderBlock={(props) => <p>{props.children}</p>}
                   placeholder="Link..."
-                  propName="linkText"
                 />
               </div>
               <svg
@@ -111,41 +116,6 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
       </div>
     </div>
   );
-};
-FeatureItem.schema = {
-  name: blockNames.FeatureItem,
-  label: "Feature",
-  category: "Main Content",
-  hideFromAddMenu: true,
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Features/FeatureItem.tsx",
-
-  getDefaultProps: () => ({
-    title: "The best experience for editors",
-    text: "Your marketing team hates gray forms. Give them the easiest UX.",
-    withIcon: true,
-    withLink: false,
-    image: icons.PHOTO_STACK,
-  }),
-  sideEditProps: [
-    {
-      name: "withIcon",
-      label: "With icon",
-      type: types.SideEditPropType.Boolean,
-    },
-    {
-      name: "withLink",
-      label: "With link",
-      type: types.SideEditPropType.Boolean,
-    },
-    {
-      name: "linkPath",
-      label: "Link to",
-      type: types.SideEditPropType.Text,
-      show: ({ withLink }: types.Props) => !!withLink,
-    },
-  ],
 };
 
 export default FeatureItem;

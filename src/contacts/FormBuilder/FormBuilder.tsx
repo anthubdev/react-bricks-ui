@@ -1,37 +1,29 @@
 import React from "react";
 import classNames from "classnames";
-import { Repeater, types } from "react-bricks/frontend";
+import { Repeater, types } from "../../shared";
 import { useForm } from "react-hook-form";
-import blockNames from "../../blockNames";
-import { buttonColors } from "../../colors";
-import {
-  backgroundSideGroup,
-  LayoutProps,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
+import { LayoutProps } from "../../LayoutSideProps";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import { ButtonProps } from "../../shared/bricks/Button";
+import Button, { ButtonProps } from "../../shared/bricks/Button";
 
 export interface FormBuilderProps extends LayoutProps {
-  buttonPosition: string;
-  "form-elements":
-    | {
-        type?: any;
-        fieldName: string;
-        label: string;
-        isRequired: boolean;
-        inputType?: string;
-        columns: number | string;
-        requiredError?: string;
-        pattern?: string;
-        patternError?: string;
-      }[]
-    | { id?: string; type: string; props: {} }[];
-  "form-buttons":
-    | ButtonProps[]
-    | { id?: string; type: string; props: ButtonProps }[];
+  buttonPosition?: string;
+  "form-elements"?: {
+    id?: string;
+    type: string;
+    props: {
+      fieldName: string;
+      label: string;
+      isRequired: boolean;
+      inputType?: string;
+      columns: number | string;
+      requiredError?: string;
+      pattern?: string;
+      patternError?: string;
+    };
+  }[];
+  "form-buttons"?: ButtonProps[];
 }
 
 const FormBuilder: types.Brick<FormBuilderProps> = ({
@@ -41,6 +33,8 @@ const FormBuilder: types.Brick<FormBuilderProps> = ({
   paddingTop,
   paddingBottom,
   buttonPosition,
+  "form-elements": formElements,
+  "form-buttons": formButtons,
 }) => {
   const {
     register,
@@ -68,10 +62,16 @@ const FormBuilder: types.Brick<FormBuilderProps> = ({
           >
             <Repeater
               propName="form-elements"
+              items={formElements}
+              itemBuilder={(props) => {
+                return <div></div>;
+              }}
               itemProps={{ register, errors }}
             />
             <Repeater
               propName="form-buttons"
+              items={formButtons}
+              itemBuilder={(props) => <Button {...props} />}
               renderWrapper={(items) => (
                 <div
                   className={classNames(
@@ -88,137 +88,6 @@ const FormBuilder: types.Brick<FormBuilderProps> = ({
       </Section>
     </div>
   );
-};
-
-FormBuilder.schema = {
-  name: blockNames.FormBuilder,
-  label: "Form",
-  category: "contact",
-  previewImageUrl: `/bricks-preview-images/${blockNames.FormBuilder}.png`,
-  repeaterItems: [
-    {
-      name: "form-elements",
-      positionLabel: "Form elements",
-      items: [
-        { type: blockNames.FormInput },
-        { type: blockNames.FormTextArea },
-        { type: blockNames.FormCheckbox },
-        { type: blockNames.FormSelect },
-        { type: blockNames.FormRadiobuttons },
-      ],
-    },
-    {
-      name: "form-buttons",
-      itemLabel: "Button",
-      itemType: blockNames.Button,
-      min: 1,
-      max: 2,
-    },
-  ],
-
-  sideEditProps: [
-    {
-      groupName: "Buttons",
-      defaultOpen: true,
-      props: [
-        {
-          name: "buttonPosition",
-          label: "Buttons position",
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Select,
-            options: [
-              { value: "justify-start", label: "Left" },
-              { value: "justify-center", label: "Center" },
-              { value: "justify-end", label: "Right" },
-            ],
-          },
-        },
-      ],
-    },
-    backgroundSideGroup,
-    paddingBordersSideGroup,
-  ],
-
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    buttonPosition: "justify-center",
-    "form-elements": [
-      {
-        type: blockNames.FormInput,
-        props: {
-          fieldName: "firstname",
-          isRequired: false,
-          inputType: "text",
-          columns: "1",
-          label: "First Name",
-          requiredError: "",
-          pattern: "",
-          patternError: "",
-        },
-      },
-      {
-        type: blockNames.FormInput,
-        props: {
-          fieldName: "lastname",
-          isRequired: false,
-          inputType: "text",
-          columns: "1",
-          label: "Last Name",
-          requiredError: "",
-          pattern: "",
-          patternError: "",
-        },
-      },
-      {
-        type: blockNames.FormInput,
-        props: {
-          fieldName: "email",
-          isRequired: true,
-          inputType: "email",
-          columns: "2",
-          label: "Email",
-          requiredError: "Email is required",
-          pattern: "",
-          patternError: "",
-        },
-      },
-      {
-        type: blockNames.FormTextArea,
-        props: {
-          fieldName: "message",
-          isRequired: false,
-          columns: "2",
-          label: "Message",
-          requiredError: "",
-          pattern: "",
-          patternError: "",
-        },
-      },
-      {
-        type: blockNames.FormCheckbox,
-        props: {
-          fieldName: "privacy",
-          isRequired: true,
-          columns: "2",
-          label: "I accept the processing of my data",
-          requiredError: "Please, accept our privacy terms",
-          pattern: "",
-          patternError: "",
-        },
-      },
-    ],
-    "form-buttons": [
-      {
-        type: "button",
-        buttonType: "submit",
-        buttonColor: buttonColors.SKY.value,
-        text: "Send",
-        variant: "solid",
-        padding: "normal",
-      },
-    ],
-  }),
 };
 
 export default FormBuilder;

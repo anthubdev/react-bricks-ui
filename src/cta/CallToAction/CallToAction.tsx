@@ -1,17 +1,11 @@
 import React from "react";
 import classNames from "classnames";
-import { Repeater, Text, types } from "react-bricks/frontend";
-import {
-  backgroundSideGroup,
-  LayoutProps,
-  paddingBordersSideGroup,
-  sectionDefaults,
-} from "../../LayoutSideProps";
-import blockNames from "../../blockNames";
-import { buttonColors, textColors } from "../../colors";
+import { Repeater, Text, types } from "../../shared";
+import { LayoutProps } from "../../LayoutSideProps";
+import { textColors } from "../../colors";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import { ButtonProps } from "../../shared/bricks/Button";
+import Button, { ButtonProps } from "../../shared/bricks/Button";
 
 export interface CallToActionProps extends LayoutProps {
   text?: string;
@@ -24,6 +18,8 @@ const CallToAction: types.Brick<CallToActionProps> = ({
   borderBottom,
   paddingTop,
   paddingBottom,
+  text,
+  buttons,
 }) => {
   return (
     <Section
@@ -42,6 +38,7 @@ const CallToAction: types.Brick<CallToActionProps> = ({
         <div className="flex-1 sm:pr-14 mb-4 sm:mb-0">
           <Text
             propName="text"
+            value={text}
             renderBlock={(props) => (
               <span
                 className={classNames(
@@ -57,52 +54,15 @@ const CallToAction: types.Brick<CallToActionProps> = ({
           />
         </div>
         <div>
-          <Repeater propName="buttons" />
+          <Repeater
+            propName="buttons"
+            items={buttons}
+            itemBuilder={(props) => <Button {...props} />}
+          />
         </div>
       </Container>
     </Section>
   );
-};
-
-CallToAction.schema = {
-  name: blockNames.CallToAction,
-  label: "Call to action",
-  playgroundLinkLabel: "View source code on Github",
-  category: "call to action",
-  tags: ["cta", "call to action"],
-  previewImageUrl: `/bricks-preview-images/${blockNames.CallToAction}.png`,
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/CallToAction/CallToAction.tsx",
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    borderTop: "boxed",
-    paddingTop: "12",
-    paddingBottom: "20",
-    text: "React Bricks is great for developers and marketing teams.",
-    buttons: [
-      {
-        text: "Discover more",
-        type: "button",
-        buttonColor: buttonColors.SKY.value,
-        href: "https://reactbricks.com",
-        isTargetBlank: true,
-        padding: "normal",
-        buttonType: "button",
-        variant: "solid",
-        simpleAnchorLink: false,
-      },
-    ],
-  }),
-  repeaterItems: [
-    {
-      name: "buttons",
-      itemType: blockNames.Button,
-      itemLabel: "Button",
-      min: 0,
-      max: 1,
-    },
-  ],
-  sideEditProps: [backgroundSideGroup, paddingBordersSideGroup],
 };
 
 export default CallToAction;

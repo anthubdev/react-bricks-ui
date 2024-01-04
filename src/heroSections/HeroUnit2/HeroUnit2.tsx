@@ -1,26 +1,12 @@
 import React from "react";
 import classNames from "classnames";
-import { Repeater, RichText, types } from "react-bricks/frontend";
-import {
-  backgroundWithImageBgSideGroup,
-  highlightTextEditProps,
-  LayoutProps,
-  paddingBordersSideGroup,
-  sectionDefaults,
-  textGradientEditProps,
-} from "../../LayoutSideProps";
-import blockNames from "../../blockNames";
-import {
-  bgColors,
-  buttonColors,
-  gradients,
-  highlightTextColors,
-  textColors,
-} from "../../colors";
+import { Repeater, RichText, types } from "../../shared";
+import { LayoutProps } from "../../LayoutSideProps";
+import { gradients, textColors } from "../../colors";
 import Container from "../../shared/components/Container";
 import Section from "../../shared/components/Section";
-import { ButtonProps } from "../../shared/bricks/Button";
-import { BadgeProps } from "../../shared/bricks/Badge";
+import Button, { ButtonProps } from "../../shared/bricks/Button";
+import Badge, { BadgeProps } from "../../shared/bricks/Badge";
 
 export interface HeroUnitProps extends LayoutProps {
   textGradient: keyof typeof gradients;
@@ -43,6 +29,10 @@ const HeroUnit2: types.Brick<HeroUnitProps> = ({
   paddingBottom,
   textGradient,
   highlightTextColor,
+  badge,
+  title,
+  text,
+  buttons,
 }: HeroUnitProps) => {
   const titleColor = textColors.GRAY_800;
   const textColor = textColors.GRAY_700;
@@ -65,6 +55,8 @@ const HeroUnit2: types.Brick<HeroUnitProps> = ({
             <div className="lg:flex">
               <Repeater
                 propName="badge"
+                itemBuilder={(props) => <Badge {...props} />}
+                items={badge}
                 itemProps={{ textAlign: "left" }}
                 renderWrapper={(items) => <div className="mb-4">{items}</div>}
               />
@@ -78,6 +70,8 @@ const HeroUnit2: types.Brick<HeroUnitProps> = ({
               style={titleStyle}
             >
               <RichText
+                propName="title"
+                value={title}
                 renderBlock={(props) => (
                   <h1
                     className={classNames(
@@ -91,7 +85,6 @@ const HeroUnit2: types.Brick<HeroUnitProps> = ({
                 )}
                 allowedFeatures={[types.RichTextFeatures.Highlight]}
                 placeholder="Type a title..."
-                propName="title"
                 renderHighlight={({ children }) => (
                   <span className={highlightTextColor.className}>
                     {children}
@@ -102,6 +95,7 @@ const HeroUnit2: types.Brick<HeroUnitProps> = ({
           </div>
           <div className="flex-1">
             <RichText
+              value={text}
               renderBlock={(props) => (
                 <p
                   className={classNames(
@@ -119,6 +113,8 @@ const HeroUnit2: types.Brick<HeroUnitProps> = ({
             />
             <Repeater
               propName="buttons"
+              items={buttons}
+              itemBuilder={(props) => <Button {...props} />}
               renderWrapper={(items) => (
                 <div className="flex flex-row space-x-5 items-center justify-center lg:justify-start mt-6">
                   {items}
@@ -130,156 +126,6 @@ const HeroUnit2: types.Brick<HeroUnitProps> = ({
       </Container>
     </Section>
   );
-};
-
-HeroUnit2.schema = {
-  name: blockNames.HeroUnit2,
-  label: "Horizontal Hero",
-  category: "hero sections",
-  tags: ["hero unit", "horizontal hero", "title"],
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Hero%20Unit/HeroUnit.tsx",
-  previewImageUrl: `/bricks-preview-images/${blockNames.HeroUnit2}.png`,
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    paddingTop: "20",
-    paddingBottom: "16",
-    textGradient: gradients.NONE.value,
-    highlightTextColor: highlightTextColors.PINK.value,
-    title: [
-      {
-        type: "paragraph",
-        children: [
-          {
-            text: "We develop ",
-          },
-          {
-            text: "beautiful",
-            highlight: true,
-          },
-          {
-            text: " web applications",
-          },
-        ],
-      },
-    ],
-    text: "We are a hi-tech web development company committed to deliver great products on time. We love to understand our customers' needs and exceed expectations.",
-    buttons: [
-      {
-        type: "link",
-        text: "Get Started now",
-        href: "",
-        isTargetBlank: false,
-        buttonType: "submit",
-        buttonColor: buttonColors.SKY.value,
-        variant: "solid",
-        padding: "normal",
-        simpleAnchorLink: false,
-      },
-      {
-        type: "link",
-        text: "Watch demo",
-        href: "",
-        isTargetBlank: false,
-        buttonType: "submit",
-        buttonColor: buttonColors.SKY.value,
-        variant: "outline",
-        padding: "normal",
-        simpleAnchorLink: false,
-      },
-    ],
-  }),
-  repeaterItems: [
-    {
-      name: "badge",
-      itemType: blockNames.Badge,
-      itemLabel: "Badge",
-      min: 0,
-      max: 1,
-    },
-    {
-      name: "buttons",
-      itemType: blockNames.Button,
-      itemLabel: "Button",
-      min: 0,
-      max: 2,
-    },
-  ],
-  sideEditProps: [
-    {
-      groupName: "Title",
-      defaultOpen: true,
-      props: [textGradientEditProps, highlightTextEditProps],
-    },
-    backgroundWithImageBgSideGroup,
-    paddingBordersSideGroup,
-  ],
-  stories: [
-    {
-      id: "horizontal-hero-dark",
-      name: "Horizontal Hero Dark",
-      showAsBrick: true,
-      previewImageUrl: `/bricks-preview-images/horizontal-hero-dark.png`,
-      props: {
-        ...sectionDefaults,
-        paddingTop: "20",
-        paddingBottom: "16",
-        backgroundColor: bgColors.DARK_GRAY.value,
-        textGradient: gradients.NONE.value,
-        highlightTextColor: highlightTextColors.LIME.value,
-        title: [
-          {
-            type: "paragraph",
-            children: [
-              {
-                text: "Great ",
-              },
-              {
-                text: "DX",
-                highlight: true,
-              },
-              {
-                text: " for Developers, great ",
-              },
-              {
-                text: "UX",
-                highlight: true,
-              },
-              {
-                text: " for Content editors.",
-              },
-            ],
-          },
-        ],
-        text: "Forget grey fields, welcome visual editing. Forget going back and forth between the CMS and your editor: it's just React. Enterprise-ready.",
-        buttons: [
-          {
-            type: "link",
-            text: "Tutorial",
-            href: "https://reactbricks.com/learn",
-            isTargetBlank: true,
-            buttonType: "submit",
-            buttonColor: buttonColors.SKY.value,
-            variant: "solid",
-            padding: "normal",
-            simpleAnchorLink: false,
-          },
-          {
-            type: "link",
-            text: "View the Docs",
-            href: "https://docs.reactbricks.com/",
-            isTargetBlank: true,
-            buttonType: "submit",
-            buttonColor: buttonColors.SKY.value,
-            variant: "outline",
-            padding: "normal",
-            simpleAnchorLink: false,
-          },
-        ],
-      },
-    },
-  ],
 };
 
 export default HeroUnit2;

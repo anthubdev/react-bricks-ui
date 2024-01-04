@@ -1,11 +1,8 @@
-import classNames from "classnames";
 import React from "react";
-import { Image, types, Text } from "react-bricks/frontend";
+import classNames from "classnames";
+import { Image, types, Text } from "../../shared";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { textColors } from "../../colors";
-import { avatars } from "../../shared/defaultImages";
-
-import blockNames from "../../blockNames";
 
 export interface TeamItemProps {
   twitter?: string;
@@ -20,11 +17,15 @@ const TeamItem: types.Brick<TeamItemProps> = ({
   twitter,
   github,
   linkedin,
+  picture,
+  memberName,
+  jobTitle,
 }) => {
   return (
     <div className="flex flex-col items-center">
       <Image
         propName="picture"
+        source={picture}
         alt="team-item"
         aspectRatio={1}
         imageClassName={classNames(
@@ -45,6 +46,7 @@ const TeamItem: types.Brick<TeamItemProps> = ({
         )}
         placeholder="Name..."
         propName="memberName"
+        value={memberName}
       />
       <Text
         renderBlock={(props) => (
@@ -54,6 +56,7 @@ const TeamItem: types.Brick<TeamItemProps> = ({
         )}
         placeholder="Role..."
         propName="jobTitle"
+        value={jobTitle}
       />
 
       {(twitter || linkedin || github) && (
@@ -95,48 +98,6 @@ const TeamItem: types.Brick<TeamItemProps> = ({
       )}
     </div>
   );
-};
-
-TeamItem.schema = {
-  name: blockNames.TeamItem,
-  label: "Member",
-  category: "team",
-  hideFromAddMenu: true,
-  playgroundLinkLabel: "View source code on Github",
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Team/TeamItem.tsx",
-
-  getDefaultProps: () => ({
-    memberName: "Matteo Frana",
-    jobTitle: "Founder and CEO",
-    twitter: "matfrana",
-    github: "",
-    linkedin: "",
-    picture: avatars.MATTEO_FRANA,
-  }),
-  sideEditProps: [
-    {
-      groupName: "Social Links",
-      defaultOpen: true,
-      props: [
-        {
-          name: "twitter",
-          label: "Twitter UserName",
-          type: types.SideEditPropType.Text,
-        },
-        {
-          name: "linkedin",
-          label: "Linkedin UserName",
-          type: types.SideEditPropType.Text,
-        },
-        {
-          name: "github",
-          label: "Github UserName",
-          type: types.SideEditPropType.Text,
-        },
-      ],
-    },
-  ],
 };
 
 export default TeamItem;

@@ -1,13 +1,12 @@
+import React from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
-import React from "react";
-import { Text, types, usePageValues } from "react-bricks/frontend";
+import { Text, types, usePageValues } from "../../shared";
 import DefaultAvatar from "./DefaultAvatar";
 import Section from "../../shared/components/Section";
 import Container from "../../shared/components/Container";
-import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
-import { LayoutProps, sectionDefaults } from "../../LayoutSideProps";
+import { LayoutProps } from "../../LayoutSideProps";
 
 export interface BlogTitleProps extends LayoutProps {
   title?: string;
@@ -20,6 +19,8 @@ const BlogTitle: types.Brick<BlogTitleProps> = ({
   borderBottom,
   paddingTop,
   paddingBottom,
+  title,
+  subtitle,
 }) => {
   const [pageValues] = usePageValues();
   return (
@@ -35,6 +36,7 @@ const BlogTitle: types.Brick<BlogTitleProps> = ({
       >
         <Text
           metaFieldName="title"
+          value={title}
           renderBlock={(prop) => {
             return (
               <h1
@@ -51,6 +53,7 @@ const BlogTitle: types.Brick<BlogTitleProps> = ({
         />
         <Text
           metaFieldName="description"
+          value={subtitle}
           renderBlock={(prop) => {
             return (
               <h2
@@ -101,25 +104,6 @@ const BlogTitle: types.Brick<BlogTitleProps> = ({
       </Container>
     </Section>
   );
-};
-
-BlogTitle.schema = {
-  name: blockNames.BlogTitle,
-  label: "Blog Title",
-  category: "single column / blog",
-  tags: ["blog", "title", "blog title"],
-  playgroundLinkLabel: "View source code on Github",
-  previewImageUrl: `/bricks-preview-images/${blockNames.BlogTitle}.png`,
-  playgroundLinkUrl:
-    "https://github.com/ReactBricks/react-bricks-ui/blob/master/src/blog/BlogTitle/BlogTitle.tsx",
-  getDefaultProps: () => ({
-    ...sectionDefaults,
-    width: "small",
-    paddingTop: "12",
-    paddingBottom: "8",
-    title: "A new fresh post",
-    subtitle: "With a beautiful subtitle",
-  }),
 };
 
 export default BlogTitle;

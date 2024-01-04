@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-import { types, File } from "react-bricks/frontend";
+import { File } from "../../shared";
 
 type VideoPlatform = "youtube" | "vimeo";
 

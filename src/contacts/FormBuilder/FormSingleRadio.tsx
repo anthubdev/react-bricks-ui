@@ -1,9 +1,9 @@
 import React from "react";
 import classNames from "classnames";
-import { Text, Plain, types } from "react-bricks/frontend";
+import { Text, Plain, types } from "../../shared";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
-import blockNames from "../../blockNames";
 import { textColors } from "../../colors";
+
 export interface FormSingleRadioProps {
   register: UseFormRegister<any>;
   fieldName: string;
@@ -69,25 +69,6 @@ const FormSingleRadio: types.Brick<FormSingleRadioProps> = ({
       </label>
     </div>
   );
-};
-
-FormSingleRadio.schema = {
-  name: blockNames.FormSingleRadio,
-  label: "Radio option",
-  category: "contact",
-  hideFromAddMenu: true,
-  // tags: [],
-
-  // Defaults when a new brick is added
-  getDefaultProps: () => ({
-    label: "New option",
-    value: "new-option",
-  }),
-
-  // Sidebar Edit controls for props
-  sideEditProps: [
-    { name: "value", type: types.SideEditPropType.Text, label: "Value" },
-  ],
 };
 
 export default FormSingleRadio;
